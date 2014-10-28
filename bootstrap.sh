@@ -53,12 +53,12 @@ curl -sS https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
 
 # Install phpmyadmin
-# sudo debconf-set-selections <<< 'phpmyadmin phpmyadmin/dbconfig-install boolean true'
-# sudo debconf-set-selections <<< 'phpmyadmin phpmyadmin/app-password-confirm password 123'
-# sudo debconf-set-selections <<< 'phpmyadmin phpmyadmin/mysql/admin-pass password 123'
-# sudo debconf-set-selections <<< 'phpmyadmin phpmyadmin/mysql/app-pass password 123'
-# sudo debconf-set-selections <<< 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2'﻿
-# apt-get -q -y install phpmyadmin
+sudo debconf-set-selections <<< 'phpmyadmin phpmyadmin/dbconfig-install boolean true'
+sudo debconf-set-selections <<< 'phpmyadmin phpmyadmin/app-password-confirm password 123'
+sudo debconf-set-selections <<< 'phpmyadmin phpmyadmin/mysql/admin-pass password 123'
+sudo debconf-set-selections <<< 'phpmyadmin phpmyadmin/mysql/app-pass password 123'
+sudo debconf-set-selections <<< 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2'﻿
+apt-get -q -y install phpmyadmin
 
 # Configure apache2 virtualhosts.
 echo "<VirtualHost *:80> 
