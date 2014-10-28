@@ -1,0 +1,5 @@
+services:
+    recipe.home:
+        class: NfqAkademija\RecipeBundle\Services\IngredientServices
+        arguments:
+            em: "@doctrine.orm.entity_manager"

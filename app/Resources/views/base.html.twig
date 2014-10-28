@@ -1,0 +1,33 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>{% block title %}Bootstrap 101 Template{% endblock %}</title>  
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">  
+    <!-- Bootstrap -->  
+  
+    {% block stylesheets %}  
+       {% stylesheets 
+            'bundles/recipe/css/*'
+            filter='cssrewrite' combine=true
+        %}  
+            <link href="{{ asset_url }}" type="text/css" rel="stylesheet">  
+        {% endstylesheets %}
+    {% endblock %}   
+    {% block javascripts %}  
+        {% javascripts 
+            '@RecipeBundle/Resources/public/js/jquery.min.js'
+            '@RecipeBundle/Resources/public/js/*'
+            combine=true 
+        %}
+            <script src="{{ asset_url }}"></script>  
+        {% endjavascripts %}
+    {% endblock %}   
+</head>  
+<body>  
+    {% block header %}
+    {% endblock %}
+    {% block body %}  
+    {% endblock %} 
+
+</body>  
+</html>
