@@ -5,12 +5,12 @@ namespace NfqAkademija\RecipeBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Recipe
+ * Unit
  *
- * @ORM\Table(name="recipes")
- * @ORM\Entity
+ * @ORM\Table(name="units")
+ * @ORM\Entity(repositoryClass="NfqAkademija\RecipeBundle\Entity\UnitRepository")
  */
-class Recipe
+class Unit
 {
     /**
      * @var integer
@@ -31,22 +31,17 @@ class Recipe
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255)
+     * @ORM\Column(name="short", type="string", length=10)
      */
-    private $image;
-
+    private $short;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="instructions", type="text")
-     */
-    private $instructions;
-
-    /**
-     * @ORM\OneToMany(targetEntity="NfqAkademija\RecipeBundle\Entity\RecipeIngredient", mappedBy="recipe")
+     *
+     * @ORM\OneToMany(targetEntity="NfqAkademija\RecipeBundle\Entity\RecipeIngredient", mappedBy="unit")
      */
     protected $ingredients;
+
 
     /**
      * Get id
@@ -62,7 +57,7 @@ class Recipe
      * Set name
      *
      * @param string $name
-     * @return Recipe
+     * @return Unit
      */
     public function setName($name)
     {
@@ -82,50 +77,28 @@ class Recipe
     }
 
     /**
-     * Set image
+     * Set short
      *
-     * @param string $image
-     * @return Recipe
+     * @param string $short
+     * @return Unit
      */
-    public function setImage($image)
+    public function setShort($short)
     {
-        $this->image = $image;
+        $this->short = $short;
 
         return $this;
     }
 
     /**
-     * Get image
+     * Get short
      *
      * @return string 
      */
-    public function getImage()
+    public function getShort()
     {
-        return $this->image;
+        return $this->short;
     }
 
-    /**
-     * Set instructions
-     *
-     * @param string $instructions
-     * @return Recipe
-     */
-    public function setInstructions($instructions)
-    {
-        $this->instructions = $instructions;
-
-        return $this;
-    }
-
-    /**
-     * Get instructions
-     *
-     * @return string 
-     */
-    public function getInstructions()
-    {
-        return $this->instructions;
-    }
     /**
      * Constructor
      */
@@ -138,7 +111,7 @@ class Recipe
      * Add ingredients
      *
      * @param \NfqAkademija\RecipeBundle\Entity\RecipeIngredient $ingredients
-     * @return Recipe
+     * @return Unit
      */
     public function addIngredient(\NfqAkademija\RecipeBundle\Entity\RecipeIngredient $ingredients)
     {

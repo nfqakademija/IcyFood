@@ -2,14 +2,13 @@
 
 namespace NfqAkademija\RecipeBundle\Entity;
 
-use NfqAkademija\RecipeBundle\Entity\Recipe;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Ingredient
  *
- * @ORM\Table()
+ * @ORM\Table(name="ingredients")
  * @ORM\Entity
  */
 class Ingredient
@@ -31,13 +30,10 @@ class Ingredient
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Recipe")
-     * @ORM\JoinTable(name="recipes_ingredients",
-     *      joinColumns={@ORM\JoinColumn(name="ingredient_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="recipe_id", referencedColumnName="id")}
-     *      )
+     * @ORM\OneToMany(targetEntity="NfqAkademija\RecipeBundle\Entity\RecipeIngredient", mappedBy="ingredient")
+     *
      **/
-    private $recipes;
+    protected $recipes;
 
 
     public function __construct()
@@ -81,10 +77,10 @@ class Ingredient
     /**
      * Add recipes
      *
-     * @param \NfqAkademija\RecipeBundle\Entity\Recipe $recipes
+     * @param \NfqAkademija\RecipeBundle\Entity\RecipeIngredient $recipes
      * @return Ingredient
      */
-    public function addRecipe(\NfqAkademija\RecipeBundle\Entity\Recipe $recipes)
+    public function addRecipe(\NfqAkademija\RecipeBundle\Entity\RecipeIngredient $recipes)
     {
         $this->recipes[] = $recipes;
 
@@ -94,9 +90,9 @@ class Ingredient
     /**
      * Remove recipes
      *
-     * @param \NfqAkademija\RecipeBundle\Entity\Recipe $recipes
+     * @param \NfqAkademija\RecipeBundle\Entity\RecipeIngredient $recipes
      */
-    public function removeRecipe(\NfqAkademija\RecipeBundle\Entity\Recipe $recipes)
+    public function removeRecipe(\NfqAkademija\RecipeBundle\Entity\RecipeIngredient $recipes)
     {
         $this->recipes->removeElement($recipes);
     }
