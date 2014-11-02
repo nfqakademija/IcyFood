@@ -1,7 +1,7 @@
 <!DOCTYPE html>  
 <html>  
 <head>  
-    <title>{% block title %}Bootstrap 101 Template{% endblock %}</title>  
+    <title>{% block title %}IcyFood{% endblock %}</title>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">  
     <!-- Bootstrap -->  
   
@@ -23,11 +23,11 @@
         {% endjavascripts %}
     {% endblock %}   
 </head>  
-<body>  
-    {% block header %}
-    {% endblock %}
+<body>
+    <div class="container">
+    {% include "menu.html.twig" %}
     {% block body %}  
-    {% endblock %} 
-
+    {% endblock %}
+    </div>
 </body>  
 </html>

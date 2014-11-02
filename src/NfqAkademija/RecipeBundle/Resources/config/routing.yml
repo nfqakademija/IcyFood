@@ -2,3 +2,8 @@ recipe_homepage:
     resource: "@RecipeBundle/Controller/"
     type:     annotation
     prefix:   /
+
+new_recipe:
+    resource: "@RecipeBundle/Controller/"
+    type:     annotation
+    prefix:   /
