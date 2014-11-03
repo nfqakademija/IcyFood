@@ -1,7 +1,7 @@
 {% block header %}
 <!-- Fixed navbar -->
 <nav class="navbar navbar-default" role="navigation">
-    <div class="container">
+    <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">IcyFood</a>
+            <a class="navbar-brand" href="{{ url('recipe_homepage') }}">IcyFood</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -22,8 +22,8 @@
     <script>
         // toggles active class of navigation items
         $('ul.nav li').removeClass('active');
-        var x = $(location).attr('href').replace( 'http://icyfood.dev' , ""); // Step 1
-        $('a[href="' + x + '"]').parent().addClass('active'); // Step 2
+        var x = $(location).attr('href').replace( '{{ url('recipe_homepage') }}' , ""); // Step 1
+        $('a[href="/' + x + '"]').parent().addClass('active'); // Step 2
     </script>
 
 {% endblock %}

@@ -1,9 +1,53 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}RecipeBundle:AddRecipe:new{% endblock %}
+{% block title %}Naujas receptas{% endblock %}
 
 {% block body %}
-    <div class="container" role="main">
-        <h4>new_recipe</h4>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    {{ form_start(form, { 'attr': {'class': 'form-horizontal'} }) }}
+                    {{ form_errors(form) }}
+                        <fieldset>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                {{ form_label(form.name, null, { 'label_attr': {'class': 'col-sm-2 control-label'} }) }}
+                                <div class="col-sm-6">
+                                    {{ form_widget(form.name, { 'attr': {'class': 'form-control input-md'} }) }}
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                {{ form_label(form.image, null, { 'label_attr': {'class': 'col-sm-2 control-label'} }) }}
+                                <div class="col-sm-6">
+                                    {{ form_widget(form.image, { 'attr': {'class': 'form-control input-md'} }) }}
+                                </div>
+                            </div>
+
+                            <!-- Textarea -->
+                            <div class="form-group">
+                                {{ form_label(form.instructions, null, { 'label_attr': {'class': 'col-sm-2 control-label'} }) }}
+                                <div class="col-sm-6">
+                                    {{ form_widget(form.instructions, { 'attr': {'class': 'form-control'} }) }}
+                                </div>
+                            </div>
+
+                            <!-- Button -->
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    {{ form_widget(form.save, { 'attr': {'class': 'btn btn-default'} }) }}
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    {{ form_end(form) }}
+
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

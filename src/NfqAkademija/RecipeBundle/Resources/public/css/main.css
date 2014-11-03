@@ -1,4 +1,21 @@
-body {
-    padding-top:    20px;
-    padding-bottom: 20px;
+@media (min-width: 992px) {
+    body {
+        padding-top: 20px;
+    }
+    .container{
+        width:       750px;
+    }
+}
+
+@media (min-width: 1200px) {
+    body {
+        padding-top: 20px;
+    }
+    .container{
+        width:       750px;
+    }
+}
+
+.control-label {
+    font-weight: 100;
 }

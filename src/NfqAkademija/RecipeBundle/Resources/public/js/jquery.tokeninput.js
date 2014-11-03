@@ -21,9 +21,9 @@ var DEFAULT_SETTINGS = {
     jsonContainer: null,
 
 	// Display settings
-    hintText: "Type in a search term",
-    noResultsText: "No results",
-    searchingText: "Searching...",
+    hintText: "Įrašykite ingridiento pavadinimą",
+    noResultsText: "Ingridientų nerasta",
+    searchingText: "Ieškoma...",
     deleteText: "&times;",
     animateDropdown: true,
 
@@ -43,7 +43,7 @@ var DEFAULT_SETTINGS = {
     idPrefix: "token-input-",
 
 	// Formatters
-    resultsFormatter: function(item){ return "<li>" + item[this.propertyToSearch]+ "</li>" },
+    resultsFormatter: function(item){ return "<li><a>" + item[this.propertyToSearch]+ "</a></li>" },
     tokenFormatter: function(item) { return "<li><p>" + item[this.propertyToSearch] + "</p></li>" },
 
 	// Callbacks
@@ -60,7 +60,7 @@ var DEFAULT_CLASSES = {
     tokenDelete: "token-input-delete-token",
     selectedToken: "token-input-selected-token",
     highlightedToken: "token-input-highlighted-token",
-    dropdown: "token-input-dropdown",
+    dropdown: "dropdown-menu ",
     dropdownItem: "token-input-dropdown-item",
     dropdownItem2: "token-input-dropdown-item2",
     selectedDropdownItem: "token-input-selected-dropdown-item",
@@ -640,14 +640,14 @@ $.TokenList = function (input, url_or_data, settings) {
 
     function show_dropdown_searching () {
         if(settings.searchingText) {
-            dropdown.html("<p>"+settings.searchingText+"</p>");
+            dropdown.html("<li class='dropdown-header'>"+settings.searchingText+"</li>");
             show_dropdown();
         }
     }
 
     function show_dropdown_hint () {
         if(settings.hintText) {
-            dropdown.html("<p>"+settings.hintText+"</p>");
+            dropdown.html("<li class='dropdown-header'>"+settings.hintText+"</li>");
             show_dropdown();
         }
     }
@@ -706,7 +706,7 @@ $.TokenList = function (input, url_or_data, settings) {
             }
         } else {
             if(settings.noResultsText) {
-                dropdown.html("<p>"+settings.noResultsText+"</p>");
+                dropdown.html("<li class='dropdown-header'>"+settings.noResultsText+"</li>");
                 show_dropdown();
             }
         }

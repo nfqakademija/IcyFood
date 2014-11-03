@@ -14,6 +14,8 @@ ul.token-input-list-facebook {
     background-color: #fff;
     list-style-type: none;
     clear: left;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
 }
 
 ul.token-input-list-facebook li input {
