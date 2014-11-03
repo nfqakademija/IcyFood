@@ -8,7 +8,9 @@
             <div class="panel panel-default">
                 <div class="panel-body">
 
-                    {{ form_start(form, { 'attr': {'class': 'form-horizontal'} }) }}
+                    {{ form(form) }}
+
+                    {#{{ form_start(form, { 'attr': {'class': 'form-horizontal'} }) }}
                     {{ form_errors(form) }}
                         <fieldset>
 
@@ -44,7 +46,7 @@
                             </div>
 
                         </fieldset>
-                    {{ form_end(form) }}
+                    {{ form_end(form) }}#}
 
                 </div>
             </div>
