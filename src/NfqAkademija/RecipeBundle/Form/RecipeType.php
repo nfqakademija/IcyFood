@@ -28,13 +28,13 @@ class RecipeType extends AbstractType
             ->add('instructions', null, array(
                 'label' => 'Instrukcija'
             ))
-//            ->add('ingredients', 'collection', array(
-//                'type'         => new IngredientType(),
-//                'allow_add'    => true,
-//                'allow_delete' => true,
-//                'by_reference' => false,
-//                'label'        => 'Ingridientai'
-//            ))
+            ->add('ingredients', 'collection', array(
+                'type'         => new IngredientType(),
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label'        => 'Ingridientai'
+            ))
             ->add('save', 'submit', array(
                 'label' => 'Sukurti'
             ))
