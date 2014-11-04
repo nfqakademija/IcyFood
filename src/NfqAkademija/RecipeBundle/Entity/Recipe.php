@@ -29,7 +29,7 @@ class Recipe
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Image", mappedBy="recipe")
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="recipe", cascade={"all"})
      */
     private $images;
 
@@ -151,6 +151,8 @@ class Recipe
      */
     public function addImage(\NfqAkademija\RecipeBundle\Entity\Image $images)
     {
+        $images->setRecipe($this);
+
         $this->images[] = $images;
 
         return $this;

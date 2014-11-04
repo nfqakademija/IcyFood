@@ -17,10 +17,6 @@ class ImageType extends AbstractType
         $builder
             ->add('name')
             ->add('file')
-            ->add('recipe', 'hidden', array(
-                'data_class' => 'NfqAkademija\RecipeBundle\Entity\Recipe',
-                'data' => NULL,
-            ))
         ;
     }
     

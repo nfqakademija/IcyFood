@@ -34,19 +34,19 @@ class AddRecipeController extends Controller
      */
     public function submitAction(Request $request)
     {
-        //$em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(new RecipeType(), new Recipe());
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            //$recipe = $form->getData();
+            $recipe = $form->getData();
 
-            //$em->persist($recipe->getName());
-            //$em->flush();
+            $em->persist($recipe);
+            $em->flush();
 
-            //return $this->redirect(...);
+            return $this->redirect($this->generateUrl('recipe_homepage'));
         }
 
         return $this->render(
