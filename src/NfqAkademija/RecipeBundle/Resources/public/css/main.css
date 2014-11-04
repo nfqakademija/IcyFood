@@ -1,21 +1,7 @@
-@media (min-width: 992px) {
-    body {
-        padding-top: 20px;
-    }
-    .container{
-        width:       750px;
-    }
+body {
+    padding-top: 20px;
 }
-
-@media (min-width: 1200px) {
-    body {
-        padding-top: 20px;
-    }
-    .container{
-        width:       750px;
-    }
-}
-
-.control-label {
-    font-weight: 100;
+.dropdown-menu>ul {
+    list-style: none;
+    padding-left: 0px;
 }

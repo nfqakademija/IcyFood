@@ -2,9 +2,7 @@
  {% block body %}
     <script type="text/javascript">
       $(document).ready(function() {
-          $("#search-ingredient").tokenInput("{{ path('search_ingredient') }}", {
-            theme: "facebook" 
-          });
+          $("#search-ingredient").tokenInput("{{ path('search_ingredient') }}")
       });
     </script>
       <!-- Main jumbotron for a primary marketing message or call to action -->

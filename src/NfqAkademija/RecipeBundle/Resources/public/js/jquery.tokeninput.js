@@ -60,7 +60,7 @@ var DEFAULT_CLASSES = {
     tokenDelete: "token-input-delete-token",
     selectedToken: "token-input-selected-token",
     highlightedToken: "token-input-highlighted-token",
-    dropdown: "dropdown-menu ",
+    dropdown: "dropdown-menu",
     dropdownItem: "token-input-dropdown-item",
     dropdownItem2: "token-input-dropdown-item2",
     selectedDropdownItem: "token-input-selected-dropdown-item",
@@ -304,7 +304,7 @@ $.TokenList = function (input, url_or_data, settings) {
     var selected_dropdown_item = null;
 
     // The list to store the token items in
-    var token_list = $("<ul />")
+    var token_list = $("<ul/>")
         .addClass(settings.classes.tokenList)
         .click(function (event) {
             var li = $(event.target).closest("li");
@@ -622,10 +622,10 @@ $.TokenList = function (input, url_or_data, settings) {
     }
 
     // Hide and clear the results dropdown
-    function hide_dropdown () {
-        dropdown.hide().empty();
-        selected_dropdown_item = null;
-    }
+    // function hide_dropdown () {
+    //     dropdown.hide().empty();
+    //     selected_dropdown_item = null;
+    // }
 
     function show_dropdown() {
         dropdown
