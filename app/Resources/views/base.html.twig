@@ -7,7 +7,7 @@
   
     {% block stylesheets %}  
        {% stylesheets 
-            'bundles/recipe/css/*'
+            '@RecipeBundle/Resources/public/css/*'
             filter='cssrewrite' combine=true
         %}  
             <link href="{{ asset_url }}" type="text/css" rel="stylesheet">  
