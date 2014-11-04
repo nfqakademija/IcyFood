@@ -15,10 +15,29 @@ class RecipeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array('label' => 'Pavadinimas'))
-            ->add('image', null, array('label' => 'Foto'))
-            ->add('instructions', null, array('label' => 'Instrukcija'))
-            ->add('save', 'submit', array('label' => 'Sukurti'))
+            ->add('name', null, array(
+                'label' => 'Pavadinimas'
+            ))
+            ->add('images', 'collection', array(
+                'type'         => new ImageType(),
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => 'Nuotraukos'
+            ))
+            ->add('instructions', null, array(
+                'label' => 'Instrukcija'
+            ))
+//            ->add('ingredients', 'collection', array(
+//                'type'         => new IngredientType(),
+//                'allow_add'    => true,
+//                'allow_delete' => true,
+//                'by_reference' => false,
+//                'label'        => 'Ingridientai'
+//            ))
+            ->add('save', 'submit', array(
+                'label' => 'Sukurti'
+            ))
         ;
     }
     

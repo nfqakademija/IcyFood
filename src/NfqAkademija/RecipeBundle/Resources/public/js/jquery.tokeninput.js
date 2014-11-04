@@ -51,6 +51,7 @@ var DEFAULT_SETTINGS = {
     onAdd: null,
     onDelete: null,
     onReady: null
+
 };
 
 // Default classes to use when theming
@@ -193,14 +194,18 @@ $.TokenList = function (input, url_or_data, settings) {
         .focus(function () {
             if (settings.tokenLimit === null || settings.tokenLimit !== token_count) {
                 show_dropdown_hint();
+                $("."+settings.classes.tokenList).addClass("active");
             }
+
         })
         .blur(function () {
             hide_dropdown();
             $(this).val("");
+            $("."+settings.classes.tokenList).removeClass("active");
         })
         .bind("keyup keydown blur update", resize_input)
         .keydown(function (event) {
+            //console.log('asdasd');
             var previous_token;
             var next_token;
 
@@ -493,7 +498,8 @@ $.TokenList = function (input, url_or_data, settings) {
         // See if the token already exists and select it if we don't want duplicates
         if(token_count > 0 && settings.preventDuplicates) {
             var found_existing_token = null;
-            token_list.children().each(function () {
+            //token_list.children().each(function () {
+            $(".panel-body>ul").children().each(function () {
                 var existing_token = $(this);
                 var existing_data = $.data(existing_token.get(0), "tokeninput");
                 if(existing_data && existing_data.id === item.id) {
@@ -504,7 +510,8 @@ $.TokenList = function (input, url_or_data, settings) {
 
             if(found_existing_token) {
                 select_token(found_existing_token);
-                input_token.insertAfter(found_existing_token);
+                //input_token.insertAfter(found_existing_token);
+                input_token.appendTo(settings.classes.tokenList);
                 input_box.focus();
                 return;
             }
@@ -518,7 +525,6 @@ $.TokenList = function (input, url_or_data, settings) {
 
         // Clear input box
         input_box.val("");
-
         // Don't show the help dropdown, they've got the idea
         hide_dropdown();
 
@@ -622,11 +628,13 @@ $.TokenList = function (input, url_or_data, settings) {
 
     }
 
-    // Hide and clear the results dropdown
-    // function hide_dropdown () {
-    //     dropdown.hide().empty();
-    //     selected_dropdown_item = null;
-    // }
+    //Hide and clear the results dropdown
+    function hide_dropdown () {
+        dropdown.hide().empty();
+        selected_dropdown_item = null;
+        //$(".token-input-list").removeClass("active");
+
+    }
 
     function show_dropdown() {
         dropdown

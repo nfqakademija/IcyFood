@@ -29,12 +29,9 @@ class Recipe
     private $name;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="recipe", cascade={"all"})
      */
-    private $image;
-
+    private $images;
 
     /**
      * @var string
@@ -79,29 +76,6 @@ class Recipe
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set image
-     *
-     * @param string $image
-     * @return Recipe
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string 
-     */
-    public function getImage()
-    {
-        return $this->image;
     }
 
     /**
@@ -165,5 +139,42 @@ class Recipe
     public function getIngredients()
     {
         return $this->ingredients;
+    }
+
+
+
+    /**
+     * Add images
+     *
+     * @param \NfqAkademija\RecipeBundle\Entity\Image $images
+     * @return Recipe
+     */
+    public function addImage(\NfqAkademija\RecipeBundle\Entity\Image $images)
+    {
+        $images->setRecipe($this);
+
+        $this->images[] = $images;
+
+        return $this;
+    }
+
+    /**
+     * Remove images
+     *
+     * @param \NfqAkademija\RecipeBundle\Entity\Image $images
+     */
+    public function removeImage(\NfqAkademija\RecipeBundle\Entity\Image $images)
+    {
+        $this->images->removeElement($images);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }
