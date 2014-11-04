@@ -2,7 +2,9 @@
  {% block body %}
     <script type="text/javascript">
       $(document).ready(function() {
-          $("#search-ingredient").tokenInput("{{ path('search_ingredient') }}")
+          $("#search-ingredient").tokenInput("{{ path('search_ingredient') }}", {
+            preventDuplicates: true 
+          });
       });
     </script>
       <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -11,6 +13,7 @@
              <div class="panel panel-default">
                  <div class="panel-heading">Mano ingridientai</div>
                  <div class="panel-body">
+                  <ul></ul>
 
                  </div>
              </div>
