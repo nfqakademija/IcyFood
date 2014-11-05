@@ -67,7 +67,7 @@ class RecipeIngredient
      * @param string $quantity
      * @return RecipeIngredient
      */
-    public function setQuantity($quantity)
+    public function setQuantity($quantity = "")
     {
         $this->quantity = $quantity;
 
