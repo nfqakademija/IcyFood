@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class IngredientType extends AbstractType
+class RecipeIngredientType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -14,19 +14,14 @@ class IngredientType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-//        $builder->add('ingredient', 'entity', array(
-//            'class' => 'RecipeBundle:Ingredient',
-//            'property' => 'name',
-//            'label' => 'Ingredientas'
-//        ));
-
-        $builder->add('name');
-
-//        $builder->add('recipe', 'hidden', array(
-//            'data_class' => 'NfqAkademija\RecipeBundle\Entity\Recipe',
-//            'data' => NULL,
-//        ));
-
+        $builder
+            ->add('ingredient', new IngredientType())
+            ->add('quantity', 'text')
+            ->add('unit', 'entity', array(
+                'class' => 'RecipeBundle:Unit',
+                'property' => 'name',
+                'label' => 'Matas'
+            ));
     }
     
     /**
@@ -35,7 +30,7 @@ class IngredientType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'NfqAkademija\RecipeBundle\Entity\Ingredient'
+            'data_class' => 'NfqAkademija\RecipeBundle\Entity\RecipeIngredient'
         ));
     }
 
@@ -44,6 +39,6 @@ class IngredientType extends AbstractType
      */
     public function getName()
     {
-        return 'nfqakademija_recipebundle_ingredient';
+        return 'nfqakademija_recipebundle_recipeingredient';
     }
 }

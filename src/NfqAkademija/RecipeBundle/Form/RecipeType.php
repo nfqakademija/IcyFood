@@ -29,7 +29,7 @@ class RecipeType extends AbstractType
                 'label' => 'Instrukcija'
             ))
             ->add('ingredients', 'collection', array(
-                'type'         => new IngredientType(),
+                'type'         => new RecipeIngredientType(),
                 'allow_add'    => true,
                 'allow_delete' => true,
                 'by_reference' => false,
