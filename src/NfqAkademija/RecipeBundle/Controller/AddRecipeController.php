@@ -49,10 +49,9 @@ class AddRecipeController extends Controller
                 ]);
 
                 if($oldIngredient){
-                    $newRecipeIngredient = $recipeingredient;
-                    $newRecipeIngredient->setIngredient($oldIngredient);
                     $recipe->removeIngredient($recipeingredient);
-                    $recipe->addIngredient($newRecipeIngredient);
+                    $recipeingredient->setIngredient($oldIngredient);
+                    $recipe->addIngredient($recipeingredient);
                 }
             }
 
