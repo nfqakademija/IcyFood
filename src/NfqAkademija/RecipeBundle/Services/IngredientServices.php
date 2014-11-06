@@ -39,6 +39,7 @@ class IngredientServices
                 $ingredient_array[]= $ingredient->getIngredient()->getName();
             }
             $uno['ingredients'] = $ingredient_array;
+            $images_array = [];
             foreach ($recipe_images as $image) {
                 $images_array[]= $image->getWebPath();
             }
