@@ -4,6 +4,7 @@
   $(document).ready(function() {
     $("#search-ingredient").tokenInput("{{ path('search_ingredient') }}", {
       preventDuplicates: true,
+      minChars: 3,
       onAdd: function(item){
         var scope = angular.element($("#recipe-list")).scope();
         scope.$apply(function(){
@@ -57,10 +58,18 @@
 <div class="row" >
   <div class="col-sm-8">  
     <div id="recipe-list">
-        {%verbatim%}{{selectedRecipe}}{%endverbatim%}  
+  
       <ul>
-        <li ng-repeat="recipe in recipes | filter:search">
-          <p>{%verbatim%}{{recipe.id}}{{recipe.name}}{%endverbatim%}</p>
+        <li ng-repeat="recipe in recipes ">
+          <p>{%verbatim%}{{recipe.id}}{%endverbatim%}</p>
+          <p><a href="/show/{%verbatim%}{{recipe.id}}{%endverbatim%}">{%verbatim%}{{recipe.name}}{%endverbatim%}</a></p>
+          <p>{%verbatim%}{{recipe.instructions}}{%endverbatim%}</p>
+          <p ng-repeat="ingredient in recipe.ingredients track by $index">
+            {%verbatim%}{{ingredient}}{%endverbatim%}
+          </p>
+          <p ng-repeat="image in recipe.images track by $index">
+              <img src="{%verbatim%}{{image}}{%endverbatim%}">
+          </p>
         </li>
       </ul>
     </div>  

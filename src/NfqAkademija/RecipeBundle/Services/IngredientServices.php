@@ -4,6 +4,9 @@ namespace NfqAkademija\RecipeBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use NfqAkademija\RecipeBundle\Entity\Recipe;
+use NfqAkademija\RecipeBundle\Entity\Ingredient;
+//use NfqAkademija\RecipeBundle\Entity\RecipeIngredient;
 
 class IngredientServices
 {
@@ -20,15 +23,47 @@ class IngredientServices
 		return $ingredients; 
 	}
 
-	public function getRecipe()
+	public function getRecipes()
 	{
 		$repository = $this->em->getRepository('RecipeBundle:Recipe');
 		$recipes = $repository->findAll();
 		foreach ($recipes as $recipe) {
-				$recipess[] = array('id'=>$recipe->getId(),'name'=>$recipe->getName());
+				$recipess[]['id'] = $recipe->getId();
+				$recipess[]['name'] = $recipe->getName();
+				$recipess[]['instructions'] = $recipe->getInstructions();
+				$recipe_images = $recipe->getImages();
+				$recipe_ingredients = $recipe->getIngredients();
+				foreach ($recipe_ingredients as $ingredient) {
+					$ingredient_array[]= $ingredient->getIngredient()->getName();
+				}
+				$recipess[]['ingredients'] = $ingredient_array;
+				foreach ($recipe_images as $image) {
+					$images_array[]= $image->getWebPath();
+				}
+				$recipess[]['images'] = $images_array;
 			}	
+		//var_dump($recipess);die();
 		return $recipess;
 		//var_dump($recipe); die();    
+	}
+	public function getRecipe($id)
+	{
+		$repository = $this->em->getRepository('RecipeBundle:Recipe');
+		$recipe = $repository->findOneById($id);
+				$recipe1[]['id'] = $recipe->getId();
+				$recipe1[]['name'] = $recipe->getName();
+				$recipe1[]['instructions'] = $recipe->getInstructions();
+				$recipe_images = $recipe->getImages();
+				$recipe_ingredients = $recipe->getIngredients();
+				foreach ($recipe_ingredients as $ingredient) {
+					$ingredient_array[]= $ingredient->getIngredient()->getName();
+				}
+				$recipess[]['ingredients'] = $ingredient_array;
+				foreach ($recipe_images as $image) {
+					$images_array[]= $image->getWebPath();
+				}
+				$recipe1[]['images'] = $images_array;
+		return $recipe1;    
 	}
     
 }

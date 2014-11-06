@@ -38,7 +38,16 @@ class HomePageController extends Controller
     public function getRecipeAction(Request $request)    
     {    
             $recipe = $this->get('recipe.home');
-            return new JsonResponse($recipe->getRecipe());
+            return new JsonResponse($recipe->getRecipes());
 
+    }
+    /**
+     * @Route("/show/{id}", name="show_recipe")
+     * @Template("RecipeBundle:HomePage:recipe.html.twig")
+     */
+    public function showAction($id)
+    {
+        $recipe = $this->get('recipe.home');
+        return array('recipe' => $recipe->getRecipe($id));
     }
 }
