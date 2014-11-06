@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AddRecipeController extends Controller
 {
@@ -67,5 +68,20 @@ class AddRecipeController extends Controller
         );
     }
 
+    /**
+     * @Route("/test", name="test")
+     * @Template()
+     */
+    public function testAction()
+    {
+        $ingredients = ['Kiaušiniai', 'Druska'];
+        $em = $this->getDoctrine()->getManager();
+        $recipes = $em->getRepository('RecipeBundle:RecipeIngredient')->getOrderedRecipes($ingredients);
 
+        $result = "";
+        foreach($recipes as $recipe){
+            $result .= $recipe['rec']." ".$recipe['num']." ".$recipe['bu']."<br />";
+        }
+        return new Response($result);
+    }
 }
