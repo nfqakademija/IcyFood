@@ -63,8 +63,13 @@ class IngredientServices
         $recipe1['instructions'] = $recipe->getInstructions();
         $recipe_images = $recipe->getImages();
         $recipe_ingredients = $recipe->getIngredients();
+        $ingredient_array =[];
         foreach ($recipe_ingredients as $ingredient) {
-            $ingredient_array[]= $ingredient->getIngredient()->getName();
+            $iuno =[];
+            $iuno['name']= $ingredient->getIngredient()->getName();
+            $iuno['quantity']= $ingredient->getQuantity();
+            $iuno['unit']= $ingredient->getUnit()->getShort();
+            $ingredient_array[] = $iuno;
         }
         $recipe1['ingredients'] = $ingredient_array;
         foreach ($recipe_images as $image) {
