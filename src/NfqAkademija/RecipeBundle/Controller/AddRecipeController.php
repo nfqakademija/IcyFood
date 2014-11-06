@@ -42,6 +42,18 @@ class AddRecipeController extends Controller
 
         if ($form->isValid()) {
             $recipe = $form->getData();
+            $recipesingredients = $recipe->getIngredients();
+            foreach($recipesingredients as $recipeingredient){
+                $oldIngredient = $em->getRepository('RecipeBundle:Ingredient')->findOneBy([
+                    'name' => $recipeingredient->getIngredient()->getName()
+                ]);
+
+                if($oldIngredient){
+                    $recipe->removeIngredient($recipeingredient);
+                    $recipeingredient->setIngredient($oldIngredient);
+                    $recipe->addIngredient($recipeingredient);
+                }
+            }
 
             $em->persist($recipe);
             $em->flush();

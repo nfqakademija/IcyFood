@@ -31,7 +31,7 @@ class Unit
     /**
      * @var string
      *
-     * @ORM\Column(name="short", type="string", length=10)
+     * @ORM\Column(name="short", type="string", length=20)
      */
     private $short;
 

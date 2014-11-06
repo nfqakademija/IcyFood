@@ -41,7 +41,7 @@ class Recipe
     private $instructions;
 
     /**
-     * @ORM\OneToMany(targetEntity="NfqAkademija\RecipeBundle\Entity\RecipeIngredient", mappedBy="recipe")
+     * @ORM\OneToMany(targetEntity="NfqAkademija\RecipeBundle\Entity\RecipeIngredient", mappedBy="recipe", cascade={"all"})
      */
     protected $ingredients;
 
@@ -116,6 +116,7 @@ class Recipe
      */
     public function addIngredient(\NfqAkademija\RecipeBundle\Entity\RecipeIngredient $ingredients)
     {
+        $ingredients->setRecipe($this);
         $this->ingredients[] = $ingredients;
 
         return $this;
