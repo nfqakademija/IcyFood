@@ -28,19 +28,21 @@ class IngredientServices
 		$repository = $this->em->getRepository('RecipeBundle:Recipe');
 		$recipes = $repository->findAll();
 		foreach ($recipes as $recipe) {
-				$recipess[]['id'] = $recipe->getId();
-				$recipess[]['name'] = $recipe->getName();
-				$recipess[]['instructions'] = $recipe->getInstructions();
+                $uno = [];
+				$uno['id'] = $recipe->getId();
+				$uno['name'] = $recipe->getName();
+				$uno['instructions'] = $recipe->getInstructions();
 				$recipe_images = $recipe->getImages();
 				$recipe_ingredients = $recipe->getIngredients();
 				foreach ($recipe_ingredients as $ingredient) {
 					$ingredient_array[]= $ingredient->getIngredient()->getName();
 				}
-				$recipess[]['ingredients'] = $ingredient_array;
+				$uno['ingredients'] = $ingredient_array;
 				foreach ($recipe_images as $image) {
 					$images_array[]= $image->getWebPath();
 				}
-				$recipess[]['images'] = $images_array;
+				$uno['images'] = $images_array;
+                $recipess[] = $uno;
 			}	
 		//var_dump($recipess);die();
 		return $recipess;
