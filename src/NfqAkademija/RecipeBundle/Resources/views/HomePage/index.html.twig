@@ -55,25 +55,13 @@
     </form>
   </div>
 </div>
-<div class="row" >
-  <div class="col-sm-8">  
-    <div id="recipe-list">
-  
-      <ul>
-        <li ng-repeat="recipe in recipes ">
-          <p>{%verbatim%}{{recipe.id}}{%endverbatim%}</p>
-          <p><a href="/show/{%verbatim%}{{recipe.id}}{%endverbatim%}">{%verbatim%}{{recipe.name}}{%endverbatim%}</a></p>
-          <p>{%verbatim%}{{recipe.instructions}}{%endverbatim%}</p>
-          <p ng-repeat="ingredient in recipe.ingredients track by $index">
-            {%verbatim%}{{ingredient}}{%endverbatim%}
-          </p>
-          <p ng-repeat="image in recipe.images track by $index">
-              <img src="{%verbatim%}{{image}}{%endverbatim%}">
-          </p>
-        </li>
-      </ul>
-    </div>  
-  </div>
-</div>
+  <div class="row" >
+    <div class="col-md-4" id="recipe-list" ng-repeat="recipe in recipes">
+     <p ng-repeat="image in recipe.images track by $index">
+        <a href="show/{%verbatim%}{{recipe.id}}{%endverbatim%}"><img src="{%verbatim%}{{image}}{%endverbatim%}"></a>
+      </p>
+    <h4><a href="show/{%verbatim%}{{recipe.id}}{%endverbatim%}">{%verbatim%}{{recipe.name}}{%endverbatim%}</a></h4>
+  </div><!-- col -->
+  </div><!-- row-->
 </div></div>
 {% endblock %}
