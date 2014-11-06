@@ -28,22 +28,23 @@ class IngredientServices
 		$repository = $this->em->getRepository('RecipeBundle:Recipe');
 		$recipes = $repository->findAll();
 		foreach ($recipes as $recipe) {
-                $uno = [];
-				$uno['id'] = $recipe->getId();
-				$uno['name'] = $recipe->getName();
-				$uno['instructions'] = $recipe->getInstructions();
-				$recipe_images = $recipe->getImages();
-				$recipe_ingredients = $recipe->getIngredients();
-				foreach ($recipe_ingredients as $ingredient) {
-					$ingredient_array[]= $ingredient->getIngredient()->getName();
-				}
-				$uno['ingredients'] = $ingredient_array;
-				foreach ($recipe_images as $image) {
-					$images_array[]= $image->getWebPath();
-				}
-				$uno['images'] = $images_array;
-                $recipess[] = $uno;
-			}	
+            $uno = [];
+            $uno['id'] = $recipe->getId();
+            $uno['name'] = $recipe->getName();
+            $uno['instructions'] = $recipe->getInstructions();
+            $recipe_images = $recipe->getImages();
+            $recipe_ingredients = $recipe->getIngredients();
+            $ingredient_array = [];
+            foreach ($recipe_ingredients as $ingredient) {
+                $ingredient_array[]= $ingredient->getIngredient()->getName();
+            }
+            $uno['ingredients'] = $ingredient_array;
+            foreach ($recipe_images as $image) {
+                $images_array[]= $image->getWebPath();
+            }
+            $uno['images'] = $images_array;
+            $recipess[] = $uno;
+		}
 		//var_dump($recipess);die();
 		return $recipess;
 		//var_dump($recipe); die();    
@@ -52,19 +53,19 @@ class IngredientServices
 	{
 		$repository = $this->em->getRepository('RecipeBundle:Recipe');
 		$recipe = $repository->findOneById($id);
-				$recipe1[]['id'] = $recipe->getId();
-				$recipe1[]['name'] = $recipe->getName();
-				$recipe1[]['instructions'] = $recipe->getInstructions();
+				$recipe1['id'] = $recipe->getId();
+				$recipe1['name'] = $recipe->getName();
+				$recipe1['instructions'] = $recipe->getInstructions();
 				$recipe_images = $recipe->getImages();
 				$recipe_ingredients = $recipe->getIngredients();
 				foreach ($recipe_ingredients as $ingredient) {
 					$ingredient_array[]= $ingredient->getIngredient()->getName();
 				}
-				$recipess[]['ingredients'] = $ingredient_array;
+				$recipe1['ingredients'] = $ingredient_array;
 				foreach ($recipe_images as $image) {
 					$images_array[]= $image->getWebPath();
 				}
-				$recipe1[]['images'] = $images_array;
+				$recipe1['images'] = $images_array;
 		return $recipe1;    
 	}
     
