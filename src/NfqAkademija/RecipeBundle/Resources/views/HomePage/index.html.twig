@@ -1,34 +1,70 @@
 {% extends '::base.html.twig' %}
- {% block body %}
-    <script type="text/javascript">
-      $(document).ready(function() {
-          $("#search-ingredient").tokenInput("{{ path('search_ingredient') }}", {
-            preventDuplicates: true 
+{% block body %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#search-ingredient").tokenInput("{{ path('search_ingredient') }}", {
+      preventDuplicates: true,
+      onAdd: function(item){
+        var scope = angular.element($("#recipe-list")).scope();
+        scope.$apply(function(){
+        scope.search = item.name;
+        });
+      },
+      onDelete: function (){ 
+        var phrases = new Object();
+        $('.panel-body').each(function(){
+          var phrase = '';
+          $(this).find('li>p').each(function(){
+            var current = $(this);
+            if(current.children().size() > 0) {return true;}
+            phrase += $(this).text();
           });
-      });
-    </script>
-      <!-- Main jumbotron for a primary marketing message or call to action -->
-     <div class="row">
-         <div class="col-sm-4">
-             <div class="panel panel-default">
-                 <div class="panel-heading">Mano ingridientai</div>
-                 <div class="panel-body">
-                  <ul></ul>
-
-                 </div>
-             </div>
-         </div>
-         <div class="col-sm-8">
-             <form class="form-horizontal" role="form">
-                         <div class="input-group">
-                             <input class="form-control" type="text" id="search-ingredient" name="ingredients[]">
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="submit">
-                      <span class="glyphicon glyphicon-plus"></span>
-                  </button>
-                </span>
-                         </div>
-             </form>
-         </div>
-     </div>
- {% endblock %}
+          phrases.name = phrase;
+        });
+        var scope = angular.element($("#recipe-list")).scope();
+        scope.$apply(function(){
+          scope.search = phrases;
+        });
+      }
+    });//#search-ingridient
+  });//document ready
+</script>
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div ng-app="recipeApp">
+  <div ng-controller="recipeController">
+<div class="row">
+  <div class="col-sm-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">Mano ingridientai</div>
+      <div class="panel-body">
+        <ul class="selectedList"></ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-8">
+    <form class="form-horizontal" role="form">
+      <div class="input-group">
+        <input class="form-control" type="text" id="search-ingredient" name="ingredients[]">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit">
+            <span class="glyphicon glyphicon-plus"></span>
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row" >
+  <div class="col-sm-8">  
+    <div id="recipe-list">
+        {%verbatim%}{{selectedRecipe}}{%endverbatim%}  
+      <ul>
+        <li ng-repeat="recipe in recipes | filter:search">
+          <p>{%verbatim%}{{recipe.id}}{{recipe.name}}{%endverbatim%}</p>
+        </li>
+      </ul>
+    </div>  
+  </div>
+</div>
+</div></div>
+{% endblock %}

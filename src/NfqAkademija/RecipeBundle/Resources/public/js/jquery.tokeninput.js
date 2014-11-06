@@ -204,7 +204,6 @@ $.TokenList = function (input, url_or_data, settings) {
         })
         .bind("keyup keydown blur update", resize_input)
         .keydown(function (event) {
-            //console.log('asdasd');
             var previous_token;
             var next_token;
 
@@ -471,10 +470,18 @@ $.TokenList = function (input, url_or_data, settings) {
         var token_data = {"id": item.id};
         token_data[settings.propertyToSearch] = item[settings.propertyToSearch];
         $.data(this_token.get(0), "tokeninput", item);
-
+        //console.log(saved_tokens);
         // Save this token for duplicate checking
         saved_tokens = saved_tokens.slice(0,selected_token_index).concat([token_data]).concat(saved_tokens.slice(selected_token_index));
         selected_token_index++;
+        var scope = angular.element($("#recipe-list")).scope();
+        scope.$apply(function(){
+          scope.msg = [];
+          //console.log(token_data[settings.propertyToSearch]);
+          scope.msg = saved_tokens;
+         //
+
+        });
 
         // Update the hidden input
         update_hidden_input(saved_tokens, hidden_input);
@@ -521,7 +528,6 @@ $.TokenList = function (input, url_or_data, settings) {
             insert_token(item);
             checkTokenLimit();
         }
-
         // Clear input box
         input_box.val("");
         // Don't show the help dropdown, they've got the idea
@@ -546,21 +552,21 @@ $.TokenList = function (input, url_or_data, settings) {
     }
 
     // Deselect a token in the token list
-    function deselect_token (token, position) {
+    function deselect_token (token, position ) {
         token.removeClass(settings.classes.selectedToken);
         selected_token = null;
 
-        if(position === POSITION.BEFORE) {
-            input_token.insertBefore(token);
-            selected_token_index--;
-        } else if(position === POSITION.AFTER) {
-            input_token.insertAfter(token);
-            selected_token_index++;
-        } else {
-            input_token.appendTo(token_list);
-            selected_token_index = token_count;
-        }
-
+        // if(position === POSITION.BEFORE) {
+        //     input_token.insertBefore(token);
+        //     selected_token_index--;
+        // } else if(position === POSITION.AFTER) {
+        //     input_token.insertAfter(token);
+        //     selected_token_index++;
+        // } else {
+        //     input_token.appendTo(token_list);
+        //     selected_token_index = token_count;
+        // }
+        input_token.appendTo(settings.classes.tokenList);
         // Show the input box and give it focus again
         input_box.focus();
     }

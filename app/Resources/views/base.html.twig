@@ -7,7 +7,7 @@
   
     {% block stylesheets %}  
        {% stylesheets 
-            '@RecipeBundle/Resources/public/css/*'
+            'bundles/recipe/css/*'
             filter='cssrewrite' combine=true
         %}  
             <link href="{{ asset_url }}" type="text/css" rel="stylesheet">  
@@ -16,6 +16,9 @@
     {% block javascripts %}  
         {% javascripts 
             '@RecipeBundle/Resources/public/js/jquery.min.js'
+            '@RecipeBundle/Resources/public/js/angular.min.js'
+            '@RecipeBundle/Resources/public/js/app/app.js'
+            '@RecipeBundle/Resources/public/js/app/controllers/main-controller.js'
             '@RecipeBundle/Resources/public/js/*'
             combine=true 
         %}
@@ -25,9 +28,9 @@
 </head>  
 <body>
     <div class="container">
-    {% include "menu.html.twig" %}
-    {% block body %}  
-    {% endblock %}
+        {% include "menu.html.twig" %}
+        {% block body %}  
+        {% endblock %}
     </div>
 </body>  
 </html>

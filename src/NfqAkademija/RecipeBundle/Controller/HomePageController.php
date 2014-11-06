@@ -32,4 +32,13 @@ class HomePageController extends Controller
     	}
         return new Response('error');
 	}
+     /**                                                                                   
+    * @Route("/recipe", name="search_recipe")
+    */
+    public function getRecipeAction(Request $request)    
+    {    
+            $recipe = $this->get('recipe.home');
+            return new JsonResponse($recipe->getRecipe());
+
+    }
 }
