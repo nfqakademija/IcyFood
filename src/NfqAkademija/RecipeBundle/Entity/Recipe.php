@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Recipe
  *
  * @ORM\Table(name="recipes")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="NfqAkademija\RecipeBundle\Entity\RecipeRepository")
  */
 class Recipe
 {
