@@ -4,6 +4,7 @@ namespace NfqAkademija\RecipeBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
+
 /**
  * RecipeIngredientRepository
  *
@@ -12,4 +13,42 @@ use Doctrine\ORM\EntityRepository;
  */
 class RecipeIngredientRepository extends EntityRepository
 {
+    public function getOrderedRecipes($ingredients)
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            "
+                            SELECT r, COUNT(i.id)/SIZE(r.ingredients) koef
+                            FROM RecipeBundle:Recipe r
+                            LEFT JOIN r.ingredients ri
+                            LEFT JOIN ri.ingredient i
+                            WHERE i.name IN (:ing)
+                            GROUP BY r
+                            ORDER BY koef DESC
+
+
+                        "
+        )->setParameter('ing', $ingredients);
+
+        $goodRecipes = $query->getResult();
+
+        $query = $em->createQuery(
+            "
+                            SELECT r, 0 koef
+                            FROM RecipeBundle:Recipe r
+                            LEFT OUTER JOIN r.ingredients ri
+                            INNER JOIN ri.ingredient i
+                            WHERE i.name NOT IN (:ing)
+
+                        "
+        )->setParameter('ing', $ingredients);
+
+        $otherRecipes = $query->getResult();
+
+        $recipes = array_merge($goodRecipes, $otherRecipes);
+
+        return $recipes;
+
+    }
 }
