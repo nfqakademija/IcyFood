@@ -1,3 +1,8 @@
+api :
+    type: rest
+    resource: "@RecipeBundle/Controller/ApiController.php"
+    prefix:   api/
+
 recipe_homepage:
     resource: "@RecipeBundle/Controller/"
     type:     annotation
