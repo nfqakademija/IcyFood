@@ -21,4 +21,16 @@ class ApiController extends Controller
         return $recipe;
     }
 
+    /**
+     * @Get("/recipes")
+     */
+    public function gpostRecipesAction(){
+        $em = $this->getDoctrine()->getManager();
+        $recipes = $em->getRepository('RecipeBundle:Recipe')->findAll();
+//        if(!is_object($recipe)){
+//            throw $this->createNotFoundException();
+//        }
+        return $recipes;
+    }
+
 }

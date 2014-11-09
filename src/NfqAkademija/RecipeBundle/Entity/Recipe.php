@@ -3,10 +3,10 @@
 namespace NfqAkademija\RecipeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
-use JMS\Serializer\Annotation\Groups;
-use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\Type;
 
 /**
  * Recipe
@@ -50,6 +50,9 @@ class Recipe
 
     /**
      * @ORM\OneToMany(targetEntity="NfqAkademija\RecipeBundle\Entity\RecipeIngredient", mappedBy="recipe", cascade={"all"})
+     * @Accessor(getter="getIngredientsNormalized")
+     * @Type("array")
+     * @Expose
      */
     protected $ingredients;
 
@@ -150,7 +153,24 @@ class Recipe
         return $this->ingredients;
     }
 
+    /**
+     * Get normalized ingredients
+     *
+     * @return array
+     */
+    public function getIngredientsNormalized()
+    {
+        $array = [];
+        foreach ($this->ingredients as $item) {
+            $ingredient = [];
+            $ingredient['name'] = $item->getIngredient()->getName();
+            $ingredient['quantity'] = $item->getQuantity();
+            $ingredient['unit'] = $item->getUnit()->getShort();
+            $array[] = $ingredient;
+        }
 
+        return $array;
+    }
 
     /**
      * Add images
