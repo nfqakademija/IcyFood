@@ -35,6 +35,19 @@ class ApiController extends Controller
     }
 
     /**
+     * Takes post data as ["Kiaušiniai", "Aliejus"]
+     * Returns a json encoded array:
+     *      [
+     *          { "recipe": {
+     *                          "id": <id>,
+     *                          "name": <name>,
+     *                          ...
+     *                      },
+     *            "koef": <koeficientas>
+     *          },
+     *          ...
+     *      ]
+     *
      * @Post("/recipes")
      */
     public function postRecipesAction(Request $request){
