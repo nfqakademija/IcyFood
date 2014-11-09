@@ -24,13 +24,13 @@ class HomePageController extends Controller
  	*/
 	public function ajaxAction(Request $request)    
 	{
-    	if ($request->isXMLHttpRequest()) {    
+    	//if ($request->isXMLHttpRequest()) {    
 
         	$ingredient = $this->container->get('recipe.home');
         	$term = $request->query->get('q');
         	return new JsonResponse($ingredient->getIngredient($term));
-    	}
-        return new Response('error');
+    	//}
+        //return new Response('error');
 	}
      /**                                                                                   
     * @Route("/recipe", name="search_recipe")
@@ -48,6 +48,15 @@ class HomePageController extends Controller
     public function showAction($id)
     {
         $recipe = $this->get('recipe.home');
-        return array('recipe' => $recipe->getRecipe($id));
+        //return array('recipe' => $recipe->getRecipe($id));
+        return new JsonResponse($recipe->getRecipe($id));
+    }
+    /**
+     * @Route("/tag", name="tag")
+     * @Template("RecipeBundle:HomePage:tag.html.twig")
+     */
+    public function tagAction()
+    {
+        return array();
     }
 }

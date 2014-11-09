@@ -19,7 +19,7 @@ class IngredientServices
 
     public function getIngredient($term = null)
     {
-        $ingredients = $this->em->createQuery('SELECT i.id, i.name FROM RecipeBundle:Ingredient i WHERE i.name like :searchterm ORDER BY i.id ASC')->setParameter('searchterm', '%'.$term.'%')->getResult();
+        $ingredients = $this->em->createQuery('SELECT i.name FROM RecipeBundle:Ingredient i WHERE i.name like :searchterm ORDER BY i.id ASC')->setParameter('searchterm', '%'.$term.'%')->getResult();
         return $ingredients;
     }
 

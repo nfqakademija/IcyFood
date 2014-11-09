@@ -6,9 +6,11 @@
     <!-- Bootstrap -->  
   
     {% block stylesheets %}  
-       {% stylesheets 
+       {% stylesheets
+            'bundles/recipe/css/ng-tags-input.min.css' 
+            'bundles/recipe/css/ng-tags-input.bootstrap.min.css'
             'bundles/recipe/css/*'
-            filter='cssrewrite' combine=true
+            filter='cssrewrite'
         %}  
             <link href="{{ asset_url }}" type="text/css" rel="stylesheet">  
         {% endstylesheets %}
@@ -17,10 +19,10 @@
         {% javascripts 
             '@RecipeBundle/Resources/public/js/jquery.min.js'
             '@RecipeBundle/Resources/public/js/angular.min.js'
+            '@RecipeBundle/Resources/public/js/ng-tags-input.min.js'
             '@RecipeBundle/Resources/public/js/app/app.js'
             '@RecipeBundle/Resources/public/js/app/controllers/main-controller.js'
             '@RecipeBundle/Resources/public/js/*'
-            combine=true 
         %}
             <script src="{{ asset_url }}"></script>  
         {% endjavascripts %}
