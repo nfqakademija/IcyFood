@@ -20,7 +20,7 @@ class RecipeRepository extends EntityRepository
         // get recipes with at least one ingredient from the $ingredients array
         $query = $em->createQuery("
 
-            SELECT r, COUNT(i.id)/SIZE(r.ingredients) koef
+            SELECT r recipe, COUNT(i.id)/SIZE(r.ingredients) koef
             FROM RecipeBundle:Recipe r
             LEFT JOIN r.ingredients ri
             LEFT JOIN ri.ingredient i
@@ -35,14 +35,14 @@ class RecipeRepository extends EntityRepository
         // put recipes' ids to an $goodIDs
         $goodIDs = [];
         foreach($goodRecipes as $recipe){
-            $goodIDs[] = $recipe[0]->getId();
+            $goodIDs[] = $recipe['recipe']->getId();
 
         }
 
         // get recipes that were not taken by the first query
         $query = $em->createQuery("
 
-            SELECT r, 0 koef
+            SELECT r recipe, 0 koef
             FROM RecipeBundle:Recipe r
             WHERE r.id NOT IN (:ids)
 

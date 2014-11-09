@@ -6,7 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 /**
  * Recipe
@@ -205,5 +207,19 @@ class Recipe
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Get image main
+     *
+     * @VirtualProperty
+     * @SerializedName("image")
+     * @Type("string")
+     *
+     * @return string
+     */
+    public function getImageMain()
+    {
+        return $this->images[0]->getWebPath();
     }
 }
