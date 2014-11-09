@@ -3,12 +3,19 @@
 namespace NfqAkademija\RecipeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 /**
  * Recipe
  *
  * @ORM\Table(name="recipes")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="NfqAkademija\RecipeBundle\Entity\RecipeRepository")
+ * @ExclusionPolicy("all")
  */
 class Recipe
 {
@@ -18,6 +25,7 @@ class Recipe
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     private $id;
 
@@ -25,6 +33,7 @@ class Recipe
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Expose
      */
     private $name;
 
@@ -37,11 +46,15 @@ class Recipe
      * @var string
      *
      * @ORM\Column(name="instructions", type="text")
+     * @Expose
      */
     private $instructions;
 
     /**
      * @ORM\OneToMany(targetEntity="NfqAkademija\RecipeBundle\Entity\RecipeIngredient", mappedBy="recipe", cascade={"all"})
+     * @Accessor(getter="getIngredientsNormalized")
+     * @Type("array")
+     * @Expose
      */
     protected $ingredients;
 
@@ -142,7 +155,24 @@ class Recipe
         return $this->ingredients;
     }
 
+    /**
+     * Get normalized ingredients
+     *
+     * @return array
+     */
+    public function getIngredientsNormalized()
+    {
+        $array = [];
+        foreach ($this->ingredients as $item) {
+            $ingredient = [];
+            $ingredient['name'] = $item->getIngredient()->getName();
+            $ingredient['quantity'] = $item->getQuantity();
+            $ingredient['unit'] = $item->getUnit()->getShort();
+            $array[] = $ingredient;
+        }
 
+        return $array;
+    }
 
     /**
      * Add images
@@ -177,5 +207,19 @@ class Recipe
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Get image main
+     *
+     * @VirtualProperty
+     * @SerializedName("image")
+     * @Type("string")
+     *
+     * @return string
+     */
+    public function getImageMain()
+    {
+        return $this->images[0]->getWebPath();
     }
 }

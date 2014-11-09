@@ -678,7 +678,11 @@ class LoadIngredientData extends AbstractFixture implements OrderedFixtureInterf
             ['Žirneliai', 'ingredient-660'],
             ['Žirniai', 'ingredient-661'],
             ['Žuvies piršteliai', 'ingredient-662'],
-            ['Žuvis', 'ingredient-663']
+            ['Žuvis', 'ingredient-663'],
+            ['Česnakai', 'ingredient-664'],
+            ['Mėsos sultinys', 'ingredient-665'],
+            ['Džiūvėsiai', 'ingredient-666'],
+
         ];
 
         foreach($ingredients as $ingredient){

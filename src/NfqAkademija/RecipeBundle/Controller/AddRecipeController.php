@@ -74,13 +74,12 @@ class AddRecipeController extends Controller
      */
     public function testAction()
     {
-        $ingredients = ['Kiaušiniai', 'Druska'];
+        $ingredients = ['Kiaušiniai', 'Svogūnai'];
         $em = $this->getDoctrine()->getManager();
-        $recipes = $em->getRepository('RecipeBundle:RecipeIngredient')->getOrderedRecipes($ingredients);
-
+        $recipes = $em->getRepository('RecipeBundle:Recipe')->getOrderedByIngredients($ingredients);
         $result = "";
         foreach($recipes as $recipe){
-            $result .= $recipe['rec']." ".$recipe['num']." ".$recipe['bu']."<br />";
+            $result .= $recipe[0]->getName()." ".$recipe['koef']."<br />";
         }
         return new Response($result);
     }
