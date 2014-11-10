@@ -7,8 +7,8 @@
       			<div class="panel-heading">Mano ingridientai</div>
       			<div class="panel-body">  
               <ul>
-                <li ng-repeat="b in a">
-      				{%verbatim%}{{b.name}}{%endverbatim%}
+                <li>
+      				{%verbatim%}{{tags}}{%endverbatim%}
                 </li>
               </ul>    				
       			</div>
@@ -24,7 +24,7 @@
   		</div>
 	</div>
 	<div class="row" ng-controller="recipeController">
-    <div class="col-md-4" id="recipe-list" ng-repeat="recipe in recipes | filterec:tags">
+    <div class="col-md-4" id="recipe-list" ng-repeat="recipe in recipes | filterByTags:tags">
     	<p ng-repeat="image in recipe.images track by $index">
         <a href="show/{%verbatim%}{{recipe.id}}{%endverbatim%}"><img src="{%verbatim%}{{image}}{%endverbatim%}"></a>
       </p>

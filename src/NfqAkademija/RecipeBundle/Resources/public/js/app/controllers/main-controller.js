@@ -1,8 +1,6 @@
 tagApp.controller('recipeController', function($scope, $http) {
 	$http.get('/recipe').success(function(data) {
 		$scope.recipes = data;
-		//$scope.b = tags;
-		//console.log($scope.b);
   	});
 });
 tagApp.controller('tagController', function($scope, $http) {
@@ -10,46 +8,35 @@ tagApp.controller('tagController', function($scope, $http) {
 		return $http.get('/search?q=' + query);
 	};
 });
-tagApp.factory('FilterRecipes', function($http){
-	var service = {
-    	results: {}
-  	};
-	$http.get('/show/1').then(function(response) {
-		service.results = response.data;
-	});
-	console.log(service);
-	return service;
-
-});
-tagApp.filter('filterec', function(FilterRecipes){
-	return function(items, tags){
-		//console.log(tags);
-		id = 2;
-		return FilterRecipes;
-	}
-});
-tagApp.filter('startsWithLetter', function () {
- 	return function (items, tags) {
- 		var filtered = [];
-  		if(typeof tags === "undefined") {
-      		return items;
-    	} else {
-    		if (tags.length > 0){
-    			for (i = 0; i < items.length; i++){
-    				for (x=0;x<items[i].ingredients.length; x++){
-    					for(z=0;z<tags.length;z++){
-    						if (items[i].ingredients[x].name == tags[z].name){
-    							filtered.push(items[i]);
-    						}
-    					}
-    					
-    				}
-    			}
-    			return filtered;
-    		} else {
-    			return items;
-    		}
-  		}
+tagApp.filter('filterByTags', function ($http) {
+  return function (items, tags) {
+    var filtered = [];
+    if (typeof tags === "undefined" || tags.length === 0){
+      return items;
+    } else {
+      if (tags.length < 2){
+        // $http.post('/recipes', ['Bulvės']).then(function(response) {
+        //   return response;
+        //   console.log(response);
+        // });
+        // filtered = response;
+      } else {
+        (items || []).forEach(function (items) {
+          var ingredients = items.ingredients;
+          var matches = tags.some(function (tag) {
+          //console.log(tag);
+            for (i=0;i<ingredients.length; i++){
+              if (ingredients[i].name.indexOf(tag.name) > -1){
+                return items;
+              }
+            }
+          });
+          if(matches){
+            filtered.push(items);
+          }
+        });
+      }
     }
-    
+    return filtered;
+  };
 });
