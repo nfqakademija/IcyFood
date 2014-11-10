@@ -2,6 +2,7 @@
 
 namespace NfqAkademija\RecipeBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\RestBundle\Controller\Annotations\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +15,8 @@ class ApiController extends Controller
     /**
      * @Get("/recipe/{id}")
      */
-    public function getRecipeAction($id){
+    public function getRecipeAction($id)
+    {
         $em = $this->getDoctrine()->getManager();
         $recipe = $em->getRepository('RecipeBundle:Recipe')->find($id);
         if(!is_object($recipe)){
@@ -27,11 +29,25 @@ class ApiController extends Controller
     /**
      * @Get("/recipes")
      */
-    public function getRecipesAction(){
+    public function getRecipesAction()
+    {
         $em = $this->getDoctrine()->getManager();
         $recipes = $em->getRepository('RecipeBundle:Recipe')->findAll();
 
         return $recipes;
+    }
+
+    /**
+     * Returns filtered ingredient list
+     *
+     * @Get("/ingredients/filter/{term}")
+     */
+    public function getIngredientsFilterAction($term)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $ingredients = $em->getRepository('RecipeBundle:Ingredient')->getFiltered($term);
+
+        return $ingredients;
     }
 
     /**
@@ -50,11 +66,15 @@ class ApiController extends Controller
      *
      * @Post("/recipes")
      */
-    public function postRecipesAction(Request $request){
+    public function postRecipesAction(Request $request)
+    {
         $content = $request->getContent();
         $ingredients = json_decode($content);
         $em = $this->getDoctrine()->getManager();
-        $recipes = $em->getRepository('RecipeBundle:Recipe')->getOrderedByIngredients($ingredients);
+        $ingredientColl = new ArrayCollection(
+            $em->getRepository('RecipeBundle:Ingredient')->findBy(array('name' => $ingredients))
+        );
+        $recipes = $em->getRepository('RecipeBundle:Recipe')->getOrderedByIngredients($ingredientColl);
 
         return $recipes;
     }
