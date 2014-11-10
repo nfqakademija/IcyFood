@@ -2,6 +2,7 @@
 
 namespace NfqAkademija\RecipeBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 
 
@@ -13,8 +14,23 @@ use Doctrine\ORM\EntityRepository;
  */
 class RecipeRepository extends EntityRepository
 {
+    /**
+     * @param ArrayCollection $ingredients
+     * @return array
+     */
     public function getOrderedByIngredients($ingredients)
     {
+        $moreIngredients = $ingredients;
+        foreach ($ingredients as $ingredient) {
+            $moreIngredients = new ArrayCollection(
+                array_merge(
+                    $moreIngredients->toArray(),
+                    $ingredient->getParentsAndChildren()->toArray()
+                )
+            );
+        }
+        $ingredientsArray = $moreIngredients->map(function($i){return $i->getName();})->toArray();
+
         $em = $this->getEntityManager();
 
         // get recipes with at least one ingredient from the $ingredients array
@@ -28,7 +44,7 @@ class RecipeRepository extends EntityRepository
             GROUP BY r
             ORDER BY koef DESC
 
-        ")->setParameter('ing', $ingredients);
+        ")->setParameter('ing', $ingredientsArray);
 
         $goodRecipes = $query->getResult();
 
