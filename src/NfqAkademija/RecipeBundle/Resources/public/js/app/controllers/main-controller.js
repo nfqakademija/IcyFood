@@ -15,11 +15,11 @@ tagApp.filter('filterByTags', function ($http) {
       return items;
     } else {
       if (tags.length < 2){
-        // $http.post('/recipes', ['Bulvės']).then(function(response) {
-        //   return response;
-        //   console.log(response);
-        // });
-        // filtered = response;
+        $http.post('/recipes', ['Bulvės']).then(function(response) {
+          return response;
+          console.log(response);
+        });
+        filtered = response;
       } else {
         (items || []).forEach(function (items) {
           var ingredients = items.ingredients;
