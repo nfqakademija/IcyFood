@@ -1,16 +1,17 @@
 {% extends '::base.html.twig' %}
 {% block body %}
-<div ng-app="tagApp" ng-controller="tagController">
+    <div ng-app="tagApp" ng-controller="tagController">
+<div>
 	<div class="row">
   		<div class="col-sm-4">
     		<div class="panel panel-default">
       			<div class="panel-heading">Mano ingridientai</div>
-      			<div class="panel-body">  
+      			<div class="panel-body">
               <ul>
-                <li>
-      				{%verbatim%}{{tags}}{%endverbatim%}
+                <li ng-repeat="tag in tags">
+      				{%verbatim%}{{tag.name}}{%endverbatim%}
                 </li>
-              </ul>    				
+              </ul>
       			</div>
     		</div>
   		</div>
@@ -23,16 +24,16 @@
 			</div>
   		</div>
 	</div>
-	<div class="row" ng-controller="recipeController">
-    <div class="col-md-4" id="recipe-list" ng-repeat="recipe in recipes | filterByTags:tags">
-    	<p ng-repeat="image in recipe.images track by $index">
-        <a href="show/{%verbatim%}{{recipe.id}}{%endverbatim%}"><img src="{%verbatim%}{{image}}{%endverbatim%}"></a>
-      </p>
-    <h4><a href="show/{%verbatim%}{{recipe.id}}{%endverbatim%}">{%verbatim%}{{recipe.name}}{%endverbatim%}</a></h4>
-    <ul class="list-inline list-ingredients">
-    <li ng-repeat="ingredient in recipe.ingredients track by $index">{%verbatim%}{{ingredient.name}}{%endverbatim%}</li>
-    </ul>
-     
-  </div>
-</div>
+    </div>
+    <div class="row">
+        <div class="col-md-4" id="recipe-list" ng-repeat="r in recipes track by $index">
+            <a href="show/{%verbatim%}{{r.recipe.id}}{%endverbatim%}"><img src="{%verbatim%}{{r.recipe.image}}{%endverbatim%}"></a>
+            <h4><a href="show/{%verbatim%}{{r.recipe.id}}{%endverbatim%}">{%verbatim%}{{r.recipe.name}}{%endverbatim%}</a></h4>
+            <ul class="list-inline list-ingredients">
+                <li ng-repeat="ingredient in r.recipe.ingredients">{%verbatim%}{{ingredient.name}}{%endverbatim%}</li>
+            </ul>
+
+        </div>
+    </div>
+    </div>
 {%endblock%}

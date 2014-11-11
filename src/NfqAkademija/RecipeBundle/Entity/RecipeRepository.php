@@ -20,6 +20,10 @@ class RecipeRepository extends EntityRepository
      */
     public function getOrderedByIngredients($ingredients)
     {
+        if($ingredients->isEmpty()) {
+            return array_map(function($i){return ['recipe' => $i, 'koef' => 0];}, $this->findAll());
+        }
+
         $moreIngredients = $ingredients;
         foreach ($ingredients as $ingredient) {
             $moreIngredients = new ArrayCollection(

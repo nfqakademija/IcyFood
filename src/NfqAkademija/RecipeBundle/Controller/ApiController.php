@@ -69,12 +69,21 @@ class ApiController extends Controller
     public function postRecipesAction(Request $request)
     {
         $content = $request->getContent();
-        $ingredients = json_decode($content);
+        $ingredients = json_decode($content, true);
+
         $em = $this->getDoctrine()->getManager();
+        $ingredientRepo = $em->getRepository('RecipeBundle:Ingredient');
+        $recipeRepo     = $em->getRepository('RecipeBundle:Recipe');
+
+        if(!is_array($ingredients)) {
+            return $recipeRepo->getOrderedByIngredients(new ArrayCollection());
+        }
+
+        $ingredients = array_map(function($i){return $i["name"];},$ingredients);
         $ingredientColl = new ArrayCollection(
-            $em->getRepository('RecipeBundle:Ingredient')->findBy(array('name' => $ingredients))
+            $ingredientRepo->findBy(array('name' => $ingredients))
         );
-        $recipes = $em->getRepository('RecipeBundle:Recipe')->getOrderedByIngredients($ingredientColl);
+        $recipes = $recipeRepo->getOrderedByIngredients($ingredientColl);
 
         return $recipes;
     }
