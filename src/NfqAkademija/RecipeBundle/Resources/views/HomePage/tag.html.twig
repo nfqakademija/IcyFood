@@ -1,20 +1,17 @@
 {% extends '::base.html.twig' %}
 {% block body %}
-    <div ng-app="tagApp" ng-controller="tagController">
-<div>
+<div ng-app="tagApp" ng-controller="tagController">
   <tags-input ng-model="tags" class="ti-input-lg">
-              <auto-complete source="loadTags($query)"></auto-complete>
-          </tags-input>
+    <auto-complete source="loadTags($query)"></auto-complete>
+  </tags-input>
+  <div class="row">
+    <div class="col-md-4" id="recipe-list" ng-repeat="r in recipes track by $index">
+      <a href="show/{%verbatim%}{{r.recipe.id}}{%endverbatim%}"><img src="{%verbatim%}{{r.recipe.image}}{%endverbatim%}"></a>
+      <h4><a href="show/{%verbatim%}{{r.recipe.id}}{%endverbatim%}">{%verbatim%}{{r.recipe.name}}{%endverbatim%}</a></h4>
+      <ul class="list-inline list-ingredients">
+        <li ng-repeat="ingredient in r.recipe.ingredients">{%verbatim%}{{ingredient.name}}{%endverbatim%}</li>
+      </ul>
     </div>
-    <div class="row">
-        <div class="col-md-4" id="recipe-list" ng-repeat="r in recipes track by $index">
-            <a href="show/{%verbatim%}{{r.recipe.id}}{%endverbatim%}"><img src="{%verbatim%}{{r.recipe.image}}{%endverbatim%}"></a>
-            <h4><a href="show/{%verbatim%}{{r.recipe.id}}{%endverbatim%}">{%verbatim%}{{r.recipe.name}}{%endverbatim%}</a></h4>
-            <ul class="list-inline list-ingredients">
-                <li ng-repeat="ingredient in r.recipe.ingredients">{%verbatim%}{{ingredient.name}}{%endverbatim%}</li>
-            </ul>
-
-        </div>
-    </div>
-    </div>
+  </div>
+</div>
 {%endblock%}
