@@ -228,4 +228,27 @@ class Recipe
     {
         return $this->images[0]->getWebPath();
     }
+
+    /**
+     * Set averageRating
+     *
+     * @param \NfqAkademija\RecipeBundle\Entity\AverageRating $averageRating
+     * @return Recipe
+     */
+    public function setAverageRating(\NfqAkademija\RecipeBundle\Entity\AverageRating $averageRating = null)
+    {
+        $this->averageRating = $averageRating;
+
+        return $this;
+    }
+
+    /**
+     * Get averageRating
+     *
+     * @return \NfqAkademija\RecipeBundle\Entity\AverageRating 
+     */
+    public function getAverageRating()
+    {
+        return $this->averageRating;
+    }
 }
