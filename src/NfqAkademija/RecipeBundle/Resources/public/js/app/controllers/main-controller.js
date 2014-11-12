@@ -14,3 +14,21 @@ tagApp.controller('tagController', function($scope, $http, recipesFactory) {
     });
 
 });
+
+tagApp.controller('ratingController', function($scope, $http) {
+    $scope.rateFunction = function(rating, id){
+        var _url = '/api/rate/recipe'
+        var data = {
+            rating: rating,
+            id: id
+        };
+
+        $http.post(_url, angular.toJson(data), {cache: false})
+        .success(function(data){
+            console.log(data);
+        })
+        .error(function(data){
+            console.log(data)
+        });
+    };
+});

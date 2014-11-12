@@ -8,6 +8,10 @@
     <div class="col-md-4" id="recipe-list" ng-repeat="r in recipes track by $index">
       <a href="show/{%verbatim%}{{r.recipe.id}}{%endverbatim%}"><img ng-src="{%verbatim%}{{r.recipe.image}}{%endverbatim%}"></a>
       <h4><a href="show/{%verbatim%}{{r.recipe.id}}{%endverbatim%}">{%verbatim%}{{r.recipe.name}}{%endverbatim%}</a></h4>
+      <div ng-controller="ratingController">
+            <div ng-init="rating = star.rating + 1"></div>
+            <div class="star-rating" star-rating rating-value="rating" data-max="5" on-rating-selected="rateFunction(rating, r.recipe.id)"></div>              
+      </div><!-- ng-controller end-->
       <ul class="list-inline list-ingredients">
         <li ng-repeat="ingredient in r.recipe.ingredients">{%verbatim%}{{ingredient.name}}{%endverbatim%}</li>
       </ul>

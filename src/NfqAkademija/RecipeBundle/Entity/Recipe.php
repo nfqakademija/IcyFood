@@ -51,6 +51,12 @@ class Recipe
     private $instructions;
 
     /**
+     * @ORM\OneToMany(targetEntity="AverageRating", mappedBy="recipe", cascade={"all"}))
+     * @var [type]
+     */
+    private $averageRating;
+
+    /**
      * @ORM\OneToMany(targetEntity="NfqAkademija\RecipeBundle\Entity\RecipeIngredient", mappedBy="recipe", cascade={"all"})
      * @Accessor(getter="getIngredientsNormalized")
      * @Type("array")

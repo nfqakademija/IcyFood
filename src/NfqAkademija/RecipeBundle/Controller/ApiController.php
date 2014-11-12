@@ -88,4 +88,13 @@ class ApiController extends Controller
         return $recipes;
     }
 
+    /**
+     * Post user rating.
+     * @Post("/rate/recipe")
+     */
+    public function postRatingAction(Request $request)
+    {
+        //TODO: Add user rating.
+    }
+
 }
