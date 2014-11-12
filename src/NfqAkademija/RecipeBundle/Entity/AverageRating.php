@@ -23,10 +23,10 @@ class AverageRating
 
     /**
      * 
-     * @ORM\OneToOne(targetEntity="Recipe", inversedBy="AverageRating")
+     * @ORM\OneToOne(targetEntity="Recipe", inversedBy="averageRating")
      * @ORM\JoinColumn(name="recipe_id", referencedColumnName="id")
      */
-    private $recipeId;
+    private $recipe;
 
     /**
      * @var float
@@ -51,29 +51,6 @@ class AverageRating
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set recipeId
-     *
-     * @param integer $recipeId
-     * @return AverageRating
-     */
-    public function setRecipeId($recipeId)
-    {
-        $this->recipeId = $recipeId;
-
-        return $this;
-    }
-
-    /**
-     * Get recipeId
-     *
-     * @return integer 
-     */
-    public function getRecipeId()
-    {
-        return $this->recipeId;
     }
 
     /**
@@ -120,5 +97,28 @@ class AverageRating
     public function getTotalVotes()
     {
         return $this->totalVotes;
+    }
+
+    /**
+     * Set recipe
+     *
+     * @param \NfqAkademija\RecipeBundle\Entity\Recipe $recipe
+     * @return AverageRating
+     */
+    public function setRecipe(\NfqAkademija\RecipeBundle\Entity\Recipe $recipe = null)
+    {
+        $this->recipe = $recipe;
+
+        return $this;
+    }
+
+    /**
+     * Get recipe
+     *
+     * @return \NfqAkademija\RecipeBundle\Entity\Recipe 
+     */
+    public function getRecipe()
+    {
+        return $this->recipe;
     }
 }

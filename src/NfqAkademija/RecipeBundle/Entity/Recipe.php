@@ -51,7 +51,7 @@ class Recipe
     private $instructions;
 
     /**
-     * @ORM\OneToMany(targetEntity="AverageRating", mappedBy="recipe", cascade={"all"}))
+     * @ORM\OneToOne(targetEntity="AverageRating", mappedBy="recipe", cascade={"all"}))
      * @var [type]
      */
     private $averageRating;
