@@ -1,4 +1,3 @@
-
 tagApp.controller('tagController', function($scope, $http, recipesFactory) {
 
     $scope.loadTags = function(query) {
