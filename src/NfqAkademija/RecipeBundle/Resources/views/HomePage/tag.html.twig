@@ -2,28 +2,9 @@
 {% block body %}
     <div ng-app="tagApp" ng-controller="tagController">
 <div>
-	<div class="row">
-  		<div class="col-sm-4">
-    		<div class="panel panel-default">
-      			<div class="panel-heading">Mano ingridientai</div>
-      			<div class="panel-body">
-              <ul>
-                <li ng-repeat="tag in tags">
-      				{%verbatim%}{{tag.name}}{%endverbatim%}
-                </li>
-              </ul>
-      			</div>
-    		</div>
-  		</div>
-  		<div class="col-sm-8">
-    		<div class="input-group">
-				<tags-input ng-model="tags" class="ti-input-lg">
-      				<auto-complete source="loadTags($query)"></auto-complete>
-    			</tags-input>
-    			<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-			</div>
-  		</div>
-	</div>
+  <tags-input ng-model="tags" class="ti-input-lg">
+              <auto-complete source="loadTags($query)"></auto-complete>
+          </tags-input>
     </div>
     <div class="row">
         <div class="col-md-4" id="recipe-list" ng-repeat="r in recipes track by $index">
