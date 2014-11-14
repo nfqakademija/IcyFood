@@ -22,7 +22,7 @@ class Votes
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Recipe", inversedBy="recipe")
+     * @ORM\ManyToOne(targetEntity="Recipe", inversedBy="votes")
      * @ORM\JoinColumn(name="recipe_id", referencedColumnName="id")
      */
     private $recipe;

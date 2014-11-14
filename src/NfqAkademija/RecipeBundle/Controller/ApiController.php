@@ -36,7 +36,7 @@ class ApiController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $recipes = $em->getRepository('RecipeBundle:Recipe')->findAll();
-
+        var_dump($recipes);
         return $recipes;
     }
 

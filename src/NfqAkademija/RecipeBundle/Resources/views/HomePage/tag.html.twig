@@ -12,7 +12,7 @@
         <li ng-repeat="ingredient in r.recipe.ingredients">{%verbatim%}{{ingredient.name}}{%endverbatim%}</li>
       </ul>
       <div ng-controller="RatingCtrl">
-    <rating ng-model="rate" ng-init="rate = r.recipe.recipe_rating.average" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" ng-click="setRating(r.recipe.id)"></rating>
+    <rating ng-model="rate" ng-init="1" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" ng-click="setRating(r.recipe.id)"></rating>
      <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{%verbatim%}{{percent}}%{%endverbatim%}</span>
     </div><!-- rating controller end-->
     </div>

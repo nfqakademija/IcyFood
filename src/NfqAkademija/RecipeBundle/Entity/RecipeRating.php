@@ -22,7 +22,7 @@ class RecipeRating
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Recipe", inversedBy="recipe")
+     * @ORM\OneToOne(targetEntity="Recipe", inversedBy="recipeRating")
      * @ORM\JoinColumn(name="recipe_id", referencedColumnName="id")
      */
     private $recipe;
