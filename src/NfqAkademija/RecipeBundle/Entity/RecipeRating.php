@@ -5,12 +5,12 @@ namespace NfqAkademija\RecipeBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * AverageRating
+ * RecipeRating
  *
- * @ORM\Table(name="average_rating")
+ * @ORM\Table(name="recipe_rating")
  * @ORM\Entity
  */
-class AverageRating
+class RecipeRating
 {
     /**
      * @var integer
@@ -22,8 +22,7 @@ class AverageRating
     private $id;
 
     /**
-     * 
-     * @ORM\OneToOne(targetEntity="Recipe", inversedBy="averageRating")
+     * @ORM\OneToOne(targetEntity="Recipe", inversedBy="recipe")
      * @ORM\JoinColumn(name="recipe_id", referencedColumnName="id")
      */
     private $recipe;
@@ -38,9 +37,9 @@ class AverageRating
     /**
      * @var integer
      *
-     * @ORM\Column(name="total_votes", type="integer")
+     * @ORM\Column(name="total", type="integer")
      */
-    private $totalVotes;
+    private $total;
 
 
     /**
@@ -57,7 +56,7 @@ class AverageRating
      * Set average
      *
      * @param float $average
-     * @return AverageRating
+     * @return RecipeRating
      */
     public function setAverage($average)
     {
@@ -77,33 +76,33 @@ class AverageRating
     }
 
     /**
-     * Set totalVotes
+     * Set total
      *
-     * @param integer $totalVotes
-     * @return AverageRating
+     * @param integer $total
+     * @return RecipeRating
      */
-    public function setTotalVotes($totalVotes)
+    public function setTotal($total)
     {
-        $this->totalVotes = $totalVotes;
+        $this->total = $total;
 
         return $this;
     }
 
     /**
-     * Get totalVotes
+     * Get total
      *
      * @return integer 
      */
-    public function getTotalVotes()
+    public function getTotal()
     {
-        return $this->totalVotes;
+        return $this->total;
     }
 
     /**
      * Set recipe
      *
      * @param \NfqAkademija\RecipeBundle\Entity\Recipe $recipe
-     * @return AverageRating
+     * @return RecipeRating
      */
     public function setRecipe(\NfqAkademija\RecipeBundle\Entity\Recipe $recipe = null)
     {

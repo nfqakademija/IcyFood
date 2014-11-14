@@ -1,5 +1,5 @@
 var recipeApp = angular.module('recipeApp',[]);
-var tagApp = angular.module('tagApp', ['ngTagsInput']);
+var tagApp = angular.module('tagApp', ['ngTagsInput', 'ui.bootstrap']);
 tagApp.config(function(tagsInputConfigProvider) {
 	tagsInputConfigProvider
 	.setDefaults('tagsInput', {

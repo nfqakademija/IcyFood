@@ -257,37 +257,4 @@ class Recipe
     {
         return $this->recipeRating;
     }
-
-    /**
-     * Add votes
-     *
-     * @param \NfqAkademija\RecipeBundle\Entity\Votes $votes
-     * @return Recipe
-     */
-    public function addVote(\NfqAkademija\RecipeBundle\Entity\Votes $votes)
-    {
-        $this->votes[] = $votes;
-
-        return $this;
-    }
-
-    /**
-     * Remove votes
-     *
-     * @param \NfqAkademija\RecipeBundle\Entity\Votes $votes
-     */
-    public function removeVote(\NfqAkademija\RecipeBundle\Entity\Votes $votes)
-    {
-        $this->votes->removeElement($votes);
-    }
-
-    /**
-     * Get votes
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getVotes()
-    {
-        return $this->votes;
-    }
 }

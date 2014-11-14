@@ -8,13 +8,13 @@
     <div class="col-md-4" id="recipe-list" ng-repeat="r in recipes track by $index">
       <a href="show/{%verbatim%}{{r.recipe.id}}{%endverbatim%}"><img ng-src="{%verbatim%}{{r.recipe.image}}{%endverbatim%}"></a>
       <h4><a href="show/{%verbatim%}{{r.recipe.id}}{%endverbatim%}">{%verbatim%}{{r.recipe.name}}{%endverbatim%}</a></h4>
-      <div ng-controller="ratingController">
-            <div ng-init="rating = star.rating + 1"></div>
-            <div class="star-rating" star-rating rating-value="rating" data-max="5" on-rating-selected="rateFunction(rating, r.recipe.id)"></div>              
-      </div><!-- ng-controller end-->
       <ul class="list-inline list-ingredients">
         <li ng-repeat="ingredient in r.recipe.ingredients">{%verbatim%}{{ingredient.name}}{%endverbatim%}</li>
       </ul>
+      <div ng-controller="RatingCtrl">
+    <rating ng-model="rate" ng-init="rate = r.recipe.recipe_rating.average" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" ng-click="setRating(r.recipe.id)"></rating>
+     <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{%verbatim%}{{percent}}%{%endverbatim%}</span>
+    </div><!-- rating controller end-->
     </div>
   </div>
 </div>

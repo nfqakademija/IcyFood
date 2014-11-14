@@ -15,20 +15,41 @@ tagApp.controller('tagController', function($scope, $http, recipesFactory) {
 
 });
 
-tagApp.controller('ratingController', function($scope, $http) {
-    $scope.rateFunction = function(rating, id){
-        var _url = '/api/rate/recipe'
-        var data = {
-            rating: rating,
-            id: id
-        };
 
-        $http.post(_url, angular.toJson(data), {cache: false})
-        .success(function(data){
-            console.log(data);
+tagApp.controller('RatingCtrl', function ($scope, $http) {
+
+  $scope.max = 5;
+  $scope.isReadonly = false;
+
+  $scope.hoveringOver = function(value) {
+    $scope.overStar = value;
+    $scope.percent = 100 * (value / $scope.max);
+  };
+
+  $scope.ratingStates = [
+    {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
+    {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+    {stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
+    {stateOn: 'glyphicon-heart'},
+    {stateOff: 'glyphicon-off'}
+  ];
+
+  $scope.setRating = function(id) {
+  
+    if($scope.isReadonly == true){
+      return;
+    }
+
+    var data = {
+      rating: $scope.rate,
+      id: id
+    };
+
+    $http.post('api/rate/recipe', angular.toJson(data), {cache: false})
+       .success(function(data){
         })
         .error(function(data){
-            console.log(data)
+          alert(data.message);
         });
-    };
+  };
 });
