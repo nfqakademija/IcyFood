@@ -36,7 +36,6 @@ class RecipeIngredient
     private $ingredient;
 
     /**
-     * @var float
      *
      * @ORM\Column(name="quantity", type="string", length=255)
      */

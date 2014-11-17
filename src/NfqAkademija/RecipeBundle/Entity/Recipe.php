@@ -130,6 +130,8 @@ class Recipe
     public function __construct()
     {
         $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

@@ -35,7 +35,7 @@ class HomePageController extends Controller
      /**                                                                                   
     * @Route("/recipe", name="search_recipe")
     */
-    public function getRecipeAction(Request $request)    
+    public function getRecipeAction()
     {    
             $recipe = $this->get('recipe.home');
             return new JsonResponse($recipe->getRecipes());
