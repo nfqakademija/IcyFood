@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use NfqAkademija\RecipeBundle\Services\ScrapeService;
 
 class AddRecipeController extends Controller
 {
@@ -69,18 +70,13 @@ class AddRecipeController extends Controller
     }
 
     /**
-     * @Route("/test", name="test")
+     * @Route("/crawler/{url}", name="crawler", requirements={"url" = ".+"})
      * @Template()
      */
-    public function testAction()
+    public function crawlAction($url)
     {
-        $ingredients = ['Kiaušiniai', 'Svogūnai'];
-        $em = $this->getDoctrine()->getManager();
-        $recipes = $em->getRepository('RecipeBundle:Recipe')->getOrderedByIngredients($ingredients);
-        $result = "";
-        foreach($recipes as $recipe){
-            $result .= $recipe[0]->getName()." ".$recipe['koef']."<br />";
-        }
-        return new Response($result);
+        $rcp = new ScrapeService($url);
+
+        return new Response(var_export($rcp->getIngredients()));
     }
 }
