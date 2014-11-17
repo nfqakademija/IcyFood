@@ -47,6 +47,7 @@ tagApp.controller('RatingCtrl', function ($scope, $http) {
 
     $http.post('api/rate/recipe', angular.toJson(data), {cache: false})
        .success(function(data){
+        
         })
         .error(function(data){
           alert(data.message);
