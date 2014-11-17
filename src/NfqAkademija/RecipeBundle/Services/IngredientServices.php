@@ -27,6 +27,7 @@ class IngredientServices
     {
         $repository = $this->em->getRepository('RecipeBundle:Recipe');
         $recipes = $repository->findAll();
+        $recipess = [];
         foreach ($recipes as $recipe) {
             $uno = [];
             $uno['id'] = $recipe->getId();
@@ -72,6 +73,7 @@ class IngredientServices
             $ingredient_array[] = $iuno;
         }
         $recipe1['ingredients'] = $ingredient_array;
+        $images_array = [];
         foreach ($recipe_images as $image) {
             $images_array[]= $image->getWebPath();
         }
