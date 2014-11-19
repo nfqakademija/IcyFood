@@ -21,7 +21,7 @@ class RecipeRepository extends EntityRepository
     public function getOrderedByIngredients($ingredients)
     {
         if($ingredients->isEmpty()) {
-            return array_map(function($i){return ['recipe' => $i, 'koef' => 0];}, $this->findAll());
+            return $this->findAllCustom();
         }
 
         $moreIngredients = $ingredients;
@@ -59,6 +59,10 @@ class RecipeRepository extends EntityRepository
 
         }
 
+        if(empty($goodIDs)){
+            return $this->findAllCustom();
+        }
+
         // get recipes that were not taken by the first query
         $query = $em->createQuery("
 
@@ -74,5 +78,10 @@ class RecipeRepository extends EntityRepository
         $recipes = array_merge($goodRecipes, $otherRecipes);
 
         return $recipes;
+    }
+
+    public function findAllCustom()
+    {
+        return array_map(function($i){return ['recipe' => $i, 'koef' => 0];}, $this->findAll());
     }
 }
