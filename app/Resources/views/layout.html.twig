@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="recipeApp">
+<head>
+    <title>{% block title %}IcyFood{% endblock %}</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+
+    {% block stylesheets %}
+        {% stylesheets
+        'bundles/recipe/css/ng-tags-input.min.css'
+        'bundles/recipe/css/ng-tags-input.bootstrap.min.css'
+        'bundles/recipe/css/*'
+        filter='cssrewrite'
+        %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
+        {% endstylesheets %}
+    {% endblock %}
+    {% block javascripts %}
+        {% javascripts
+        '@RecipeBundle/Resources/public/js/jquery.min.js'
+        '@RecipeBundle/Resources/public/js/angular.min.js'
+        '@RecipeBundle/Resources/public/js/angular-route.min.js'
+        '@RecipeBundle/Resources/public/js/ng-tags-input.min.js'
+        '@RecipeBundle/Resources/public/js/ui-bootstrap-tpls-0.11.2.min.js'
+        '@RecipeBundle/Resources/public/js/app/app.js'
+        '@RecipeBundle/Resources/public/js/app/controllers/home-controller.js'
+        '@RecipeBundle/Resources/public/js/app/controllers/nav-controller.js'
+        '@RecipeBundle/Resources/public/js/app/services/recipesFactory.js'
+        '@RecipeBundle/Resources/public/js/*'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+</head>
+<body>
+<div class="container">
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url('recipe_homepage') }}">IcyFood</a>
+            </div>
+            <div class="navbar-collapse collapse" ng-controller="navController">
+                <ul class="nav navbar-nav">
+                    <li class="{%verbatim%}{ active: isActive('/')}{%endverbatim%}"><a href="{{ path('recipe_homepage') }}">Rask receptą</a></li>
+                    <li class="{%verbatim%}{ active: isActive('/naujas')}{%endverbatim%}"><a href="{{ path('new_recipe') }}">Įkelk receptą</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <div ng-view></div>
+</div>
+</body>
+</html>
