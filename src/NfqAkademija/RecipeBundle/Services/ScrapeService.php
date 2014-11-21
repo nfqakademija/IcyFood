@@ -32,7 +32,6 @@ class ScrapeService
     {
         $raw = $this->content->filterXPath("//div[@class='tekstas_cont']/p[1]");
         $ret = [];
-        $count = 0;
         foreach ($raw->getNode(0)->childNodes as $node) {
             if ($node->nodeName === '#text') {
                 if (strlen(trim($node->wholeText)) > 4) {

@@ -18,7 +18,8 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('recipe');
+        //$rootNode = $treeBuilder->root('recipe');
+        $treeBuilder->root('recipe');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
