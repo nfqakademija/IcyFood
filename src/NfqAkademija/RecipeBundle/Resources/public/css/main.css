@@ -104,8 +104,10 @@ body {
 /* Ingredient checkboxes and labels */
 
 label {
-    font-weight: normal;
+    font-weight: 100;
     font-size: 24px;
+    margin-bottom: -4px;
+    margin-top: -6px;
 }
 
 input[type=checkbox] { display:none; } /* to hide the checkbox itself */
@@ -119,3 +121,12 @@ input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between c
 
 input[type=checkbox]:checked + label:before { content: "\f046"; } /* checked icon */
 input[type=checkbox]:checked + label:before { letter-spacing: 5px; } /* allow space for check mark */
+
+div.ingredient {
+    display: inline-block;
+    position: absolute;
+}
+
+div.ingredient_block {
+    padding-top: 15px;
+}
