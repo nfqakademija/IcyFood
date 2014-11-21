@@ -47,8 +47,8 @@
             </div>
             <div class="navbar-collapse collapse" ng-controller="navController">
                 <ul class="nav navbar-nav">
-                    <li class="{%verbatim%}{ active: isActive('/')}{%endverbatim%}"><a href="{{ path('recipe_homepage') }}">Rask receptą</a></li>
-                    <li class="{%verbatim%}{ active: isActive('/naujas')}{%endverbatim%}"><a href="{{ path('new_recipe') }}">Įkelk receptą</a></li>
+                    <li class="{%verbatim%}{{ isActive('/') }}{%endverbatim%}"><a href="{{ path('recipe_homepage') }}">Rask receptą</a></li>
+                    <li class="{%verbatim%}{{ isActive('/naujas') }}{%endverbatim%}"><a href="{{ path('new_recipe') }}">Įkelk receptą</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
