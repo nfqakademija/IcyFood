@@ -110,11 +110,10 @@ class ApiController extends Controller
         $votes = $em->getRepository('RecipeBundle:Votes');
 
         if($votes->hasUserVoted($voteData['id'], $ip)){
-            $error = json_encode(array('message' => 'Jūs už sitą receptą jau balsavote!'));
-            return new Response($error, 419);
+            return false;
         }
 
-        // // Record user vote.
+        // Record user vote.
         $recipe = $em->getRepository('RecipeBundle:recipe')->find($voteData['id']);
         $votes = new Votes();
         $votes->setRecipe($recipe);
@@ -138,7 +137,6 @@ class ApiController extends Controller
 
             return;
         }
-
 
         // Calculate new average rating.
         $average = $recipeRating->getAverage();
