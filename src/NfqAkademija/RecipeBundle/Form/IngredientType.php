@@ -14,19 +14,7 @@ class IngredientType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-//        $builder->add('ingredient', 'entity', array(
-//            'class' => 'RecipeBundle:Ingredient',
-//            'property' => 'name',
-//            'label' => 'Ingredientas'
-//        ));
-
         $builder->add('name');
-
-//        $builder->add('recipe', 'hidden', array(
-//            'data_class' => 'NfqAkademija\RecipeBundle\Entity\Recipe',
-//            'data' => NULL,
-//        ));
-
     }
     
     /**
