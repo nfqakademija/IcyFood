@@ -22,6 +22,11 @@ recipeApp.controller('RatingCtrl', function ($scope, $http) {
     $scope.max = 5;
     $scope.isReadonly = false;
 
+    $scope.init = function(rating, allowedToVote){
+        $scope.rate = rating;
+        $scope.isReadonly = allowedToVote;
+    }
+
     $scope.ratingStates = [
         {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
         {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
@@ -32,6 +37,10 @@ recipeApp.controller('RatingCtrl', function ($scope, $http) {
 
     $scope.setRating = function(id) {
 
+        if($scope.isReadonly == true){
+            return false;
+        }
+
         var data = {
             rating: $scope.rate,
             id: id
@@ -39,10 +48,9 @@ recipeApp.controller('RatingCtrl', function ($scope, $http) {
 
         $http.post('api/rate/recipe', angular.toJson(data), {cache: false})
             .success(function(data){
-
+                $scope.isReadonly = true;
             })
             .error(function(data){
-                alert(data.message);
             });
     };
 });
