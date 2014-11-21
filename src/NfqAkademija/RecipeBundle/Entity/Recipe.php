@@ -44,7 +44,6 @@ class Recipe
 
     /**
      * @ORM\OneToOne(targetEntity="RecipeRating", mappedBy="recipe", cascade={"all"})
-     * @Expose
      */
     private $recipeRating;
 
@@ -293,23 +292,4 @@ class Recipe
         return $this->votes;
     }
 
-    /**
-     * Get image main
-     *
-     * @VirtualProperty
-     * @SerializedName("ip")
-     * @Type("string")
-     *
-     * @return string
-     */
-    public function isReadOnly()
-    {
-        if(!$this->votes->isEmpty()){
-            if($this->votes[0] instanceof Votes){
-                return $this->votes[0]->getIp();
-            }
-        }
-
-        return "";
-    }
 }

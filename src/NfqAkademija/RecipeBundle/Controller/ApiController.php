@@ -87,6 +87,8 @@ class ApiController extends Controller
             $ingredientRepo->findBy(array('name' => $ingredients))
         );
         $recipes = $recipeRepo->getOrderedByIngredients($ingredientColl);
+        $ratingService = $this->container->get('recipe.rating');
+        $recipes = $ratingService->addRatingByIp($this->container->get('request')->getClientIp(), $recipes);
 
         return $recipes;
     }
