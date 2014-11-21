@@ -22,11 +22,6 @@ recipeApp.controller('RatingCtrl', function ($scope, $http) {
     $scope.max = 5;
     $scope.isReadonly = false;
 
-    $scope.hoveringOver = function(value) {
-        $scope.overStar = value;
-        $scope.percent = 100 * (value / $scope.max);
-    };
-
     $scope.ratingStates = [
         {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
         {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
@@ -36,10 +31,6 @@ recipeApp.controller('RatingCtrl', function ($scope, $http) {
     ];
 
     $scope.setRating = function(id) {
-
-        if($scope.isReadonly == true){
-            return;
-        }
 
         var data = {
             rating: $scope.rate,
