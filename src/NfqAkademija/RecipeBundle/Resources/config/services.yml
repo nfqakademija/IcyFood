@@ -2,4 +2,4 @@ services:
     recipe.rating:
         class: NfqAkademija\RecipeBundle\Services\RatingService
         arguments:
-            em: "@doctrine.orm.entity_manager"
+            em: "@doctrine"

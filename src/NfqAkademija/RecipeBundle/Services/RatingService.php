@@ -2,15 +2,16 @@
 
 namespace NfqAkademija\RecipeBundle\Services;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 class RatingService
 {
-    protected $em;
+    // usage: $entityManager = $this->managerRegistry->getManagerForClass(get_class($recipe));
+    protected $managerRegistry;
 
-    public function __construct(EntityManager $em)
+    public function __construct(ManagerRegistry $managerRegistry)
     {
-        $this->em = $em;
+        $this->managerRegistry = $managerRegistry;
     }
 
     /**
