@@ -4,14 +4,22 @@
   </tags-input>
   <div class="row">
     <div class="col-md-4" id="recipe-list" ng-repeat="r in recipes">
-      <a href="show/{{r.recipe.id}}"><img ng-src="{{r.recipe.image}}"></a>
       <h4><a href="show/{{r.recipe.id}}">{{r.recipe.name}}</a></h4>
-      <ul class="list-inline list-ingredients">
-        <li ng-repeat="ingredient in r.recipe.ingredients">{{ingredient.name}}</li>
-      </ul>
       <div ng-controller="RatingCtrl">
         <rating class="rating" ng-style="success" ng-model="rate" ng-init="rate = r.rating" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" ng-click="setRating(r.recipe.id)"></rating>
       </div><!-- rating controller end-->
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <a href="show/{{r.recipe.id}}"><img ng-src="{{r.recipe.image}}"></a>
+          <div>
+            <div ng-repeat="ingredient in r.recipe.ingredients">
+              <input id="{{ ingredient.name }}" type="checkbox" />
+              <label for="{{ ingredient.name }}">{{ ingredient.name }} <i>{{ ingredient.quantity }} {{ ingredient.unit }}</i></label>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
   </div>
 

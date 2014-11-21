@@ -14,7 +14,7 @@ use NfqAkademija\RecipeBundle\Services\ScrapeService;
 class AddRecipeController extends Controller
 {
     /**
-     * @Route("/naujas", name="new_recipe")
+     * @Route("/form/naujas", name="new_recipe")
      * @Template()
      */
     public function newAction()
@@ -31,7 +31,7 @@ class AddRecipeController extends Controller
     }
 
     /**
-     * @Route("/naujas/submit", name="new_recipe_submit")
+     * @Route("/form/naujas/submit", name="new_recipe_submit")
      * @Template()
      */
     public function submitAction(Request $request)
@@ -70,7 +70,7 @@ class AddRecipeController extends Controller
     }
 
     /**
-     * @Route("/crawler/{url}", name="crawler", requirements={"url" = ".+"})
+     * @Route("/form/crawler/{url}", name="crawler", requirements={"url" = ".+"})
      * @Template()
      */
     public function crawlAction($url)
