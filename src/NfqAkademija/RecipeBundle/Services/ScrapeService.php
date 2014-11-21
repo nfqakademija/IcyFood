@@ -33,14 +33,23 @@ class ScrapeService
         $raw = $this->content->filterXPath("//div[@class='tekstas_cont']/p[1]");
         $ret = [];
         foreach ($raw->getNode(0)->childNodes as $node) {
-            if ($node->nodeName === '#text') {
-                if (strlen(trim($node->wholeText)) > 4) {
-                    $ret[] = $this->trimAll($node->wholeText);
-                }
+            if ($this->nodeValid($node, "#text")) {
+                $ret[] = $this->trimAll($node->wholeText);
             }
         }
 
         return $ret;
+    }
+
+    private function nodeValid($node, $type)
+    {
+        if ($node->nodeName === $type) {
+            if (strlen(trim($node->wholeText)) > 4) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function scrapeInstructions()
@@ -49,15 +58,11 @@ class ScrapeService
         $ret = "";
         $count = 0;
         foreach ($raw->getNode(0)->childNodes as $node) {
-            if ($node->nodeName === '#text') {
-                if (strlen(trim($node->wholeText)) > 4) {
-                    $ret .= $this->trimAll($node->wholeText)."\n\n";
-                }
+            if ($this->nodeValid($node, "#text")) {
+                $ret .= $this->trimAll($node->wholeText)."\n\n";
             }
-            if ($node->nodeName === 'p' && ++$count!=1) {
-                if (strlen(trim($node->nodeValue)) > 4) {
-                    $ret .= $this->trimAll($node->nodeValue)."\n\n";
-                }
+            if ($this->nodeValid($node, "p") && ++$count!=1) {
+                $ret .= $this->trimAll($node->nodeValue)."\n\n";
             }
         }
 
