@@ -12,9 +12,20 @@ recipeApp.factory('recipesFactory', function($q, $http) {
             });
         return deferred.promise;
     };
-
+    var getRecipe = function (id) {
+        var deferred = $q.defer();
+        $http.get('/api/recipe/'+id)
+            .success(function(data){
+                deferred.resolve(data);
+            })
+            .error(function(reason){
+                deferred.reject(reason);
+            });
+        return deferred.promise;
+    };
     return {
-        get : get
+        get : get,
+        getRecipe: getRecipe
     };
 
 });

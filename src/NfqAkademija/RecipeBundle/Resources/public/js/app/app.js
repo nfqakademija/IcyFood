@@ -5,6 +5,11 @@ recipeApp.config(function($routeProvider, $locationProvider, tagsInputConfigProv
         .when('/', {
             templateUrl : 'part/home.html',
             controller  : 'homeController'
+        })
+        // route for the show page
+        .when('/show/:id', {
+            templateUrl : '/part/show.html',
+            controller  : 'showController',
         });
 
     $locationProvider
@@ -19,7 +24,7 @@ recipeApp.config(function($routeProvider, $locationProvider, tagsInputConfigProv
             replaceSpacesWithDashes: false
         })
         .setDefaults('autoComplete', {
-            debounceDelay: 0,
+            debounceDelay: 500,
             minLength: 1
         })
 });

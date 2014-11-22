@@ -37,8 +37,15 @@ recipeApp.controller('homeController', function($scope, $http, recipesFactory) {
         });
     });
 
+})
+.controller('showController', function($scope, $routeParams, recipesFactory){
+    var recipe = recipesFactory.getRecipe($routeParams.id);
+    recipe.then(function(value){
+        $scope.recipe = value;
+    }, function(reason) {
+        $scope.errors = reason;
+    });
 });
-
 
 recipeApp.controller('RatingCtrl', function ($scope, $http) {
 
