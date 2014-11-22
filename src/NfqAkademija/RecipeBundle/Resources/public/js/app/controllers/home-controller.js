@@ -22,7 +22,7 @@ recipeApp.controller('homeController', function($scope, $http, recipesFactory) {
     recipe.then(function(value){
         $scope.recipe = value;
     }, function(reason) {
-        $scope.error = reason;
+        $scope.errors = reason;
     });
 });
 

@@ -1,5 +1,9 @@
+
 <div class="row recipe">
   <div class="col-md-12">
+    <div class="error">
+      <p ng-repeat="error in errors">{{error.message}}</p>
+    </div>
     <h4>{{recipe.name}}</h4>
     <div ng-controller="RatingCtrl">
       <rating class="rating" ng-style="success" ng-model="rate" ng-init="init(r.rating, r.readonly)" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" ng-click="setRating(r.recipe.id)"></rating>

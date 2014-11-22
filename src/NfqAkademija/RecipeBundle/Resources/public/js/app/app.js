@@ -24,7 +24,7 @@ recipeApp.config(function($routeProvider, $locationProvider, tagsInputConfigProv
             replaceSpacesWithDashes: false
         })
         .setDefaults('autoComplete', {
-            debounceDelay: 0,
+            debounceDelay: 500,
             minLength: 1
         })
 });
