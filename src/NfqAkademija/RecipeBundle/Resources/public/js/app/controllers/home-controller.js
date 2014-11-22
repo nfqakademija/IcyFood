@@ -7,6 +7,17 @@ recipeApp.controller('homeController', function($scope, $http, recipesFactory) {
         return $http.get('/api/ingredients/filter/' + query);
     };
 
+    $scope.isChecked = function(ingredientId) {
+        if($scope.tags.length > 0){
+            for (var i=0; i<$scope.tags.length; i++) {
+                if ($scope.tags[i].id == ingredientId) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+
     $scope.$watchCollection('tags', function(newValue, oldValue, $scope) {
         var promesa = recipesFactory.get(newValue);
         promesa.then(function(value) {

@@ -177,6 +177,7 @@ class Recipe
         $array = [];
         foreach ($this->ingredients as $item) {
             $ingredient = [];
+            $ingredient['id'] = $item->getIngredient()->getId();
             $ingredient['name'] = $item->getIngredient()->getName();
             $ingredient['quantity'] = $item->getQuantity();
             $ingredient['unit'] = $item->getUnit()->getShort();
