@@ -39,9 +39,9 @@ recipeApp
 
     })
 
-    .controller('showController', function($scope, $routeParams, recipesFactory){
-        var recipe = recipesFactory.getRecipe($routeParams.id);
-        recipe.then(function(value){
+    .controller('showController', function($scope, $routeParams, recipesFactory) {
+        var promesa = recipesFactory.getRecipe($routeParams.id);
+        promesa.then(function(value){
             $scope.recipe = value;
         }, function(reason) {
             $scope.errors = reason;
@@ -53,10 +53,16 @@ recipeApp
         $scope.max = 5;
         $scope.isReadonly = false;
 
+        $scope.$watch('recipe', function(newValue, oldValue, $scope) {
+            if(typeof $scope.recipe === 'object') {
+                $scope.init($scope.recipe.rating, $scope.recipe.readonly);
+            }
+        });
+
         $scope.init = function(rating, allowedToVote){
             $scope.rate = rating;
             $scope.isReadonly = allowedToVote;
-        }
+        };
 
         $scope.ratingStates = [
             {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},

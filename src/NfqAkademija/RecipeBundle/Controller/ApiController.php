@@ -26,6 +26,9 @@ class ApiController extends Controller
             throw $this->createNotFoundException();
         }
 
+        $ratingService = $this->container->get('recipe.rating');
+        $recipe = $ratingService->addRatingByIp($this->container->get('request')->getClientIp(), ['recipe' => $recipe]);
+
         return $recipe;
     }
 
@@ -88,7 +91,7 @@ class ApiController extends Controller
         );
         $recipes = $recipeRepo->getOrderedByIngredients($ingredientColl);
         $ratingService = $this->container->get('recipe.rating');
-        $recipes = $ratingService->addRatingByIp($this->container->get('request')->getClientIp(), $recipes);
+        $recipes = $ratingService->addRatingByIpAll($this->container->get('request')->getClientIp(), $recipes);
 
         return $recipes;
     }

@@ -1,22 +1,22 @@
 
-<div class="row recipe">
+<div class="row recipe" ng-cloak>
   <div class="col-md-12">
     <div class="error">
       <p ng-repeat="error in errors">{{error.message}}</p>
     </div>
-    <h4>{{recipe.name}}</h4>
+    <h4>{{recipe.recipe.name}}</h4>
     <div ng-controller="RatingCtrl">
-      <rating class="rating" ng-style="success" ng-model="rate" ng-init="init(r.rating, r.readonly)" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" ng-click="setRating(r.recipe.id)"></rating>
+      <rating class="rating" ng-style="success" ng-model="rate" ng-init="init(recipe.rating, recipe.readonly)" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" ng-click="setRating(recipe.recipe.id)"></rating>
     </div>
     <div class="thumbnail" style="display: inline-block">
-      <img ng-src="/{{recipe.image}}">
+      <img ng-src="/{{recipe.recipe.image}}">
     </div>
     <div class="instructions">
-      {{recipe.instructions}}
+      {{recipe.recipe.instructions}}
     </div>
     <div class="ingredients">
       <ul>
-        <li ng-repeat="ingredient in recipe.ingredients">
+        <li ng-repeat="ingredient in recipe.recipe.ingredients">
           {{ingredient.name}} ({{ingredient.quantity}}{{ingredient.unit}})
         </li>
       </ul>

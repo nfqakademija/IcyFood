@@ -12,6 +12,7 @@ recipeApp.factory('recipesFactory', function($q, $http) {
             });
         return deferred.promise;
     };
+
     var getRecipe = function (id) {
         var deferred = $q.defer();
         $http.get('/api/recipe/'+id)
@@ -23,6 +24,7 @@ recipeApp.factory('recipesFactory', function($q, $http) {
             });
         return deferred.promise;
     };
+
     return {
         get : get,
         getRecipe: getRecipe

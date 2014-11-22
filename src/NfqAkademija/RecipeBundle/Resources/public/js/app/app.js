@@ -9,7 +9,7 @@ recipeApp.config(function($routeProvider, $locationProvider, tagsInputConfigProv
         // route for the show page
         .when('/show/:id', {
             templateUrl : '/part/show.html',
-            controller  : 'showController',
+            controller  : 'showController'
         });
 
     $locationProvider
