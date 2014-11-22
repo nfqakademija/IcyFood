@@ -42,7 +42,7 @@ recipeApp
     .controller('showController', function($scope, $routeParams, recipesFactory) {
         var promesa = recipesFactory.getRecipe($routeParams.id);
         promesa.then(function(value){
-            $scope.recipe = value;
+            $scope.r = value;
         }, function(reason) {
             $scope.errors = reason;
         });
@@ -53,9 +53,9 @@ recipeApp
         $scope.max = 5;
         $scope.isReadonly = false;
 
-        $scope.$watch('recipe', function(newValue, oldValue, $scope) {
-            if(typeof $scope.recipe === 'object') {
-                $scope.init($scope.recipe.rating, $scope.recipe.readonly);
+        $scope.$watch('r', function(newValue, oldValue, $scope) {
+            if(typeof $scope.r === 'object') {
+                $scope.init($scope.r.rating, $scope.r.readonly);
             }
         });
 
