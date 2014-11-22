@@ -12,8 +12,8 @@
       <a href="show/{{r.recipe.id}}"><img ng-src="{{r.recipe.image}}"></a>
       <div class="ingredient_block">
         <div ng-repeat="ingredient in r.recipe.ingredients">
-          <input id="{{ ingredient.name }}" type="checkbox" />
-          <label for="{{ ingredient.name }}"></label>
+          <input id="{{ r.recipe.id }}_{{ ingredient.id }}" type="checkbox" ng-checked="isChecked(ingredient.id)" ng-click="toggleIngredient(ingredient)" />
+          <label for="{{ r.recipe.id }}_{{ ingredient.id }}"></label>
           <div class="ingredient">{{ ingredient.name }} <i>{{ ingredient.quantity }} {{ ingredient.unit }}</i></div>
         </div>
       </div>
