@@ -2,8 +2,8 @@
 <tags-input ng-model="tags" class="ti-input-lg">
   <auto-complete source="loadTags($query)"></auto-complete>
 </tags-input>
-<div class="row">
-  <div class="col-md-3" ng-repeat="r in recipes">
+<div masonry load-images="false" class="row">
+  <div class="col-md-3 masonry-brick" ng-repeat="r in recipes">
     <h4><a href="show/{{r.recipe.id}}">{{r.recipe.name}}</a></h4>
     <div ng-controller="RatingCtrl">
       <rating class="rating" ng-style="success" ng-model="rate" ng-init="init(r.rating, r.readonly)" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" ng-click="setRating(r.recipe.id)"></rating>
