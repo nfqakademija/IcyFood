@@ -40,13 +40,13 @@ class RecipeRepository extends EntityRepository
         // get recipes with at least one ingredient from the $ingredients array
         $query = $em->createQuery("
 
-            SELECT r recipe, COUNT(i.id)/SIZE(r.ingredients) koef
+            SELECT r recipe, COUNT(i.id)/SIZE(r.ingredients) koef, SIZE(r.ingredients)-COUNT(i.id) missing
             FROM RecipeBundle:Recipe r
             LEFT JOIN r.ingredients ri
             LEFT JOIN ri.ingredient i
             WHERE i.name IN (:ing)
             GROUP BY r
-            ORDER BY koef DESC
+            ORDER BY missing ASC
 
         ")->setParameter('ing', $ingredientsArray);
 
@@ -66,7 +66,7 @@ class RecipeRepository extends EntityRepository
         // get recipes that were not taken by the first query
         $query = $em->createQuery("
 
-            SELECT r recipe, 0 koef
+            SELECT r recipe, 0 koef, SIZE(r.ingredients) missing
             FROM RecipeBundle:Recipe r
             WHERE r.id NOT IN (:ids)
 
@@ -82,6 +82,6 @@ class RecipeRepository extends EntityRepository
 
     public function findAllCustom()
     {
-        return array_map(function($i){return ['recipe' => $i, 'koef' => 0];}, $this->findAll());
+        return array_map(function($i){return ['recipe' => $i, 'koef' => 0, 'missing' => 0];}, $this->findAll());
     }
 }
