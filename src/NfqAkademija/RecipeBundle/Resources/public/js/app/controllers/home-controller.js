@@ -28,10 +28,32 @@ recipeApp
             $scope.tags.push({id: ingredient.id, name: ingredient.name});
         };
 
+        $scope.recipesArrange = function(newRecipes) {
+            if (!($scope.recipes instanceof Array)) {
+                $scope.recipes = newRecipes;
+                return;
+            }
+            var i=0;
+            while ( i<$scope.recipes.length) {
+                while ($scope.recipes[i].recipe.id != newRecipes[i].recipe.id) {
+                    $scope.recipes.splice(i,1);
+                    if (typeof $scope.recipes[i] == 'undefined') {
+                        break;
+                    }
+                }
+                i++;
+            }
+            i--;
+            while (i<newRecipes.length){
+                $scope.recipes.push(newRecipes[i]);
+                i++;
+            }
+        };
+
         $scope.$watchCollection('tags', function(newValue, oldValue, $scope) {
             var promesa = recipesFactory.get(newValue);
             promesa.then(function(value) {
-                $scope.recipes = value;
+                $scope.recipesArrange(value);
             }, function(reason) {
                 $scope.error = reason;
             });
