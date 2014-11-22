@@ -38,12 +38,12 @@ recipeApp
                 while ($scope.recipes[i].recipe.id != newRecipes[i].recipe.id) {
                     $scope.recipes.splice(i,1);
                     if (typeof $scope.recipes[i] == 'undefined') {
+                        i--;
                         break;
                     }
                 }
                 i++;
             }
-            i--;
             while (i<newRecipes.length){
                 $scope.recipes.push(newRecipes[i]);
                 i++;
