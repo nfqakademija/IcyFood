@@ -114,6 +114,7 @@ input[type=checkbox] { display:none; } /* to hide the checkbox itself */
 input[type=checkbox] + label:before {
     font-family: FontAwesome;
     display: inline-block;
+    cursor: pointer;
 }
 
 input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
