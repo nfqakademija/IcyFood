@@ -1,6 +1,8 @@
 
 recipeApp.controller('homeController', function($scope, $http, recipesFactory) {
 
+    $scope.tags = [];
+
     $scope.loadTags = function(query) {
         return $http.get('/api/ingredients/filter/' + query);
     };
