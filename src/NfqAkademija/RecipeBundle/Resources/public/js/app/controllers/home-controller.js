@@ -18,6 +18,16 @@ recipeApp.controller('homeController', function($scope, $http, recipesFactory) {
         return false;
     };
 
+    $scope.toggleIngredient = function(ingredient) {
+        for (var i=0; i<$scope.tags.length; i++) {
+            if ($scope.tags[i].id == ingredient.id) {
+                $scope.tags.splice(i,1);
+                return;
+            }
+        }
+        $scope.tags.push({id: ingredient.id, name: ingredient.name});
+    };
+
     $scope.$watchCollection('tags', function(newValue, oldValue, $scope) {
         var promesa = recipesFactory.get(newValue);
         promesa.then(function(value) {
