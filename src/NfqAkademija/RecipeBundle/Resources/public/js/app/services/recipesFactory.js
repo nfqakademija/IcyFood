@@ -7,8 +7,8 @@ recipeApp.factory('recipesFactory', function($q, $http) {
             .success(function(data){
                 deferred.resolve(data);
             })
-            .error(function(){
-                deferred.reject("error");
+            .error(function(reason){
+                deferred.reject(reason);
             });
         return deferred.promise;
     };
