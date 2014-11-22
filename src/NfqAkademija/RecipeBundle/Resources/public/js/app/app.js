@@ -5,6 +5,11 @@ recipeApp.config(function($routeProvider, $locationProvider, tagsInputConfigProv
         .when('/', {
             templateUrl : 'part/home.html',
             controller  : 'homeController'
+        })
+        // route for the show page
+        .when('/show/:id', {
+            templateUrl : '/part/show.html',
+            controller  : 'showController',
         });
 
     $locationProvider
