@@ -61,13 +61,17 @@ recipeApp
 
     })
 
-    .controller('showController', function($scope, $routeParams, recipesFactory) {
+    .controller('showController', function($scope, $routeParams, recipesFactory, $location) {
         var promesa = recipesFactory.getRecipe($routeParams.id);
         promesa.then(function(value){
             $scope.r = value;
         }, function(reason) {
             $scope.errors = reason;
-        });
+        })
+        $scope.id = $routeParams.id;
+        $scope.getLocation = function(){
+            return document.location.href;
+        }
     })
 
     .controller('RatingCtrl', function ($scope, $http) {
@@ -112,4 +116,13 @@ recipeApp
                 .error(function(data){
                 });
         };
+    })
+    .directive('fbComments', function() {
+        return {
+            restrict: 'C',
+            link: function(scope, element, attributes) { 
+                element[0].dataset.href = document.location.href;
+                return typeof FB !== "undefined" && FB !== null ? FB.XFBML.parse(element.parent()[0]) : void 0;
+            }
+        }
     });
