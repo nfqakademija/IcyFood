@@ -8,8 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class HomePageController extends Controller
 {
-	/** 
-	* @Route("/", name="recipe_homepage")
+	/**
+     * @Route("/", name="recipe_homepage")
 	* @Template("RecipeBundle:HomePage:index.html.twig")
 	*/
     public function indexAction()
@@ -17,4 +17,12 @@ class HomePageController extends Controller
         return array();
     }
 
+    /**
+     * @Route("/{any}", name="any", requirements={"any" = ".*"})
+     * @Template("RecipeBundle:HomePage:index.html.twig")
+     */
+    public function anyAction($any)
+    {
+        return array();
+    }
 }
