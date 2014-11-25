@@ -97,10 +97,6 @@ body {
     width: 34px;
 }
 
-/* User rating */
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
-.rating{outline:0;}
-
 /* Ingredient checkboxes and labels */
 
 label {

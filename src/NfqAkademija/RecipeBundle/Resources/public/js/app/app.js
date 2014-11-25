@@ -18,7 +18,7 @@ recipeApp.config(function($routeProvider, $locationProvider, tagsInputConfigProv
 
     tagsInputConfigProvider
         .setDefaults('tagsInput', {
-            placeholder: 'Ką turite šaldytuve?',
+            placeholder: 'Surašykite jūsų turimus ingredientus',
             displayProperty: 'name',
             addFromAutocompleteOnly: true,
             replaceSpacesWithDashes: false

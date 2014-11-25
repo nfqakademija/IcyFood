@@ -4,12 +4,14 @@
     <title>{% block title %}IcyFood{% endblock %}</title>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
 
     {% block stylesheets %}
         {% stylesheets
         'bundles/recipe/css/ng-tags-input.min.css'
         'bundles/recipe/css/ng-tags-input.bootstrap.min.css'
         'bundles/recipe/css/*'
+        'bundles/recipe/css/style.css'
         filter='cssrewrite'
         %}
         <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
@@ -18,7 +20,7 @@
     {% block javascripts %}
         {% javascripts
         '@RecipeBundle/Resources/public/js/jquery.min.js'
-        '@RecipeBundle/Resources/public/js/masonry.min.js'
+        '@RecipeBundle/Resources/public/js/bootstrap.min.js'
         '@RecipeBundle/Resources/public/js/angular.min.js'
         '@RecipeBundle/Resources/public/js/imagesloaded.min.js'
         '@RecipeBundle/Resources/public/js/angular-route.min.js'
@@ -28,6 +30,7 @@
         '@RecipeBundle/Resources/public/js/app/controllers/home-controller.js'
         '@RecipeBundle/Resources/public/js/app/controllers/nav-controller.js'
         '@RecipeBundle/Resources/public/js/app/services/recipesFactory.js'
+        '@RecipeBundle/Resources/public/js/masonry.min.js'
         '@RecipeBundle/Resources/public/js/angular-masonry.min.js'
         '@RecipeBundle/Resources/public/js/*'
         %}
@@ -36,9 +39,10 @@
     {% endblock %}
 </head>
 <body>
-<div class="container">
+
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default" role="navigation">
+    <div class="container">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -49,16 +53,18 @@
                 </button>
                 <a class="navbar-brand" href="{{ url('recipe_homepage') }}">IcyFood</a>
             </div>
-            <div class="navbar-collapse collapse" ng-controller="navController">
+            <div class="navbar-collapse collapse pull-right" ng-controller="navController">
                 <ul class="nav navbar-nav">
                     <li class="{%verbatim%}{{ isActive('/') }}{%endverbatim%}"><a href="{{ path('recipe_homepage') }}">Rask receptą</a></li>
                     <li class="{%verbatim%}{{ isActive('/naujas') }}{%endverbatim%}"><a href="{{ path('new_recipe') }}">Įkelk receptą</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
+        </div><!-- container end-->
     </nav>
-
+    
     <div ng-view ng-cloak class="ng-cloak"></div>
-</div>
+
+
 </body>
 </html>
