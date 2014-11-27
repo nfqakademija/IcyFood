@@ -1,4 +1,7 @@
 var recipeApp = angular.module('recipeApp',['angular-loading-bar', 'ngTagsInput', 'ui.bootstrap', 'ui.router', 'wu.masonry', 'infinite-scroll']);
+recipeApp.run(['$state', '$stateParams',function($state, $stateParams) {
+        //this solves page refresh and getting back to state
+}]);
 recipeApp.config(function(cfpLoadingBarProvider, $urlRouterProvider, $stateProvider, tagsInputConfigProvider, $locationProvider) {
 
     cfpLoadingBarProvider.includeSpinner = false;
@@ -19,8 +22,7 @@ recipeApp.config(function(cfpLoadingBarProvider, $urlRouterProvider, $stateProvi
     $locationProvider
     //     // dont use hashtags for urls
          .html5Mode(true);
-
-    // 
+ 
     $urlRouterProvider.otherwise('/');
 
     var modal = null;
