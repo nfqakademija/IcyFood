@@ -1,3 +1,10 @@
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/lt_LT/sdk.js#xfbml=1&appId=739661786122356&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <div class="row recipe">
   <div class="col-md-12">
     <a href="#" ng-click="$close()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
@@ -9,7 +16,7 @@
     <div ng-controller="RatingCtrl">
       <rating class="rating" ng-style="success" ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" ng-click="setRating(r.recipe.id)"></rating>
     </div>
-    <div class="fb-like" data-share="true" data-width="450" data-show-faces="true" style="display: inline-block"></div>
+    <div class="fb-like" data-href="{{absurl}}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
     </div>
     <div class="modal-body">
     <div class="thumbnail" style="display: inline-block">
@@ -25,7 +32,7 @@
         </li>
       </ul>
     </div>
-    <div class="fb-comments" data-href="{{absurl}}" data-mobile="" data-numposts="10" data-width="100%" data-colorscheme="light" id="commentbox"></div>
+    <div class="fb-comments" data-href="{{absurl}}" data-numposts="10" data-colorscheme="light" id="commentbox"></div>
     </div>
   </div>
 </div>
