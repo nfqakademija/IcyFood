@@ -78,14 +78,14 @@ recipeApp
         });      
     })
 
-    .controller('showController', function($scope, $routeParams, recipesFactory, $location) {
-        var promesa = recipesFactory.getRecipe($routeParams.id);
+    .controller('showController', function($scope, $stateParams, recipesFactory, $location) {
+        var promesa = recipesFactory.getRecipe($stateParams.id);
         promesa.then(function(value){
             $scope.r = value;
         }, function(reason) {
             $scope.errors = reason;
         })
-        $scope.id = $routeParams.id;
+        $scope.id = $stateParams.id;
         $scope.getLocation = function(){
             return document.location.href;
         }

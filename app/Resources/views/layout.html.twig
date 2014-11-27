@@ -33,6 +33,7 @@
         '@RecipeBundle/Resources/public/js/masonry.min.js'
         '@RecipeBundle/Resources/public/js/angular-masonry.min.js'
         '@RecipeBundle/Resources/public/js/ng-infinite-scroll.js'
+        '@RecipeBundle/Resources/public/js/angular-ui-router.js'
         '@RecipeBundle/Resources/public/js/*'
         %}
         <script src="{{ asset_url }}"></script>
@@ -64,7 +65,8 @@
     </div><!-- container end-->
     </nav>
     
-    <div ng-view ng-cloak class="ng-cloak"></div>
+    <!-- <div ng-view ng-cloak class="ng-cloak"></div> -->
+    <div ui-view></div>
 
 
 </body>
