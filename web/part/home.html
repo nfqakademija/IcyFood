@@ -1,29 +1,28 @@
 <div class="jumbotron">
   <div class="container">
     <tags-input ng-model="tags" class="ti-input-lg">
-  <auto-complete source="loadTags($query)"></auto-complete>
-  </tags-input>
-</div>
-</div>
-</div><!-- jumbotron -->
-<div class="container">
-<div class="row">
-  <div class="col-md-12">
-    <h2 class="text-center">Jūs galite pasigaminti</h2>
-    <hr>
+      <auto-complete source="loadTags($query)"></auto-complete>
+    </tags-input>
   </div>
 </div>
-<div masonry preserve-order class="row">
-  <div class="col-md-3 col-xs-6 col-xxs col-sm-4 masonry-brick" ng-repeat="r in recipes">
-    <div class="recipe-invis back"></div>
-    <div class="recipe-invis">
-      <div class="recipe-box">
-        <a href="show/{{r.recipe.id}}"><img class="img-responsive" ng-src="{{r.recipe.image}}"></a>
-        <h4><a href="show/{{r.recipe.id}}">{{r.recipe.name}}</a></h4>
-        <div class="rating-box" ng-controller="RatingCtrl">
-          <rating class="rating" ng-style="success" ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" ng-click="setRating(r.recipe.id)"></rating><p> 25 Įvertinimai</p>
-          <div class="clearfix"></div>
-          </div><!-- rating controller end-->
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-center">Jūs galite pasigaminti</h2>
+      <hr>
+    </div>
+  </div>
+  <div masonry preserve-order class="row" infinite-scroll='loadMore()' infinite-scroll-disabled='noMore()' infinite-scroll-distance='0'>
+      <div class="col-md-3 col-xs-6 col-xxs col-sm-4 masonry-brick" ng-repeat="r in newrecipes">
+        <div class="recipe-invis">
+          <div class="recipe-box">
+            <a href="" ui-sref="show({id: r.recipe.id})"><img class="img-responsive" ng-src="{{r.recipe.image}}"></a>
+            <h4><a href="" ui-sref="show({id: r.recipe.id})">{{r.recipe.name}}</a></h4>
+            <div class="rating-box" ng-controller="RatingCtrl">
+              <rating class="rating" ng-style="success" ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" ng-click="setRating(r.recipe.id)"></rating><p> 25 Įvertinimai</p>
+              <div class="clearfix"></div>
+            </div><!-- rating controller end-->
           </div><!-- recipe box-->
           <div class="ingredient_block">
             <div ng-repeat="ingredient in r.recipe.ingredients">
@@ -31,9 +30,8 @@
               <label for="{{ r.recipe.id }}_{{ ingredient.id }}"></label>
               <div class="ingredient">{{ ingredient.name }} <i>{{ ingredient.quantity }} {{ ingredient.unit }}</i></div>
             </div>
-            </div><!-- ingredient block -->
-            </div><!-- recipe invis-->
-            
-          </div>
-        </div>
+          </div><!-- ingredient block -->
+        </div><!-- recipe invis-->        
       </div>
+  </div>
+</div>

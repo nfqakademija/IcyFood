@@ -11,6 +11,8 @@
         'bundles/recipe/css/ng-tags-input.min.css'
         'bundles/recipe/css/ng-tags-input.bootstrap.min.css'
         'bundles/recipe/css/*'
+        'bundles/recipe/css/style.css'
+        'bundles/recipe/css/loading-bar.css'
         filter='cssrewrite'
         %}
         <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
@@ -31,6 +33,8 @@
         '@RecipeBundle/Resources/public/js/app/services/recipesFactory.js'
         '@RecipeBundle/Resources/public/js/masonry.min.js'
         '@RecipeBundle/Resources/public/js/angular-masonry.min.js'
+        '@RecipeBundle/Resources/public/js/ng-infinite-scroll.js'
+        '@RecipeBundle/Resources/public/js/angular-ui-router.js'
         '@RecipeBundle/Resources/public/js/*'
         %}
         <script src="{{ asset_url }}"></script>
@@ -59,10 +63,11 @@
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
-        </div><!-- container end-->
+    </div><!-- container end-->
     </nav>
     
-    <div ng-view ng-cloak class="ng-cloak"></div>
+    <!-- <div ng-view ng-cloak class="ng-cloak"></div> -->
+    <div ui-view></div>
 
 
 </body>
