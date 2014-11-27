@@ -63,7 +63,6 @@ recipeApp.config(function(cfpLoadingBarProvider, $urlRouterProvider, $stateProvi
                 templateUrl: '/part/show.html',
                 controller: 'showController'
             }
-
         }
     });
     tagsInputConfigProvider
