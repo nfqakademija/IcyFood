@@ -85,10 +85,6 @@ recipeApp
         }, function(reason) {
             $scope.errors = reason;
         })
-        $scope.id = $stateParams.id;
-        $scope.getLocation = function(){
-            return document.location.href;
-        }
     })
 
     .controller('RatingCtrl', function ($scope, $http) {
@@ -127,8 +123,7 @@ recipeApp
             };
 
             $http.post('/api/rate/recipe', angular.toJson(data), {cache: false})
-                .success(function(data, status){
-                    console.log(status);
+                .success(function(data){
                     $scope.isReadonly = true;
                 })
                 .error(function(data){
