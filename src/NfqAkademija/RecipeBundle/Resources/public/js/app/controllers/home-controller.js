@@ -126,8 +126,9 @@ recipeApp
                 id: id
             };
 
-            $http.post('api/rate/recipe', angular.toJson(data), {cache: false})
-                .success(function(data){
+            $http.post('/api/rate/recipe', angular.toJson(data), {cache: false})
+                .success(function(data, status){
+                    console.log(status);
                     $scope.isReadonly = true;
                 })
                 .error(function(data){
