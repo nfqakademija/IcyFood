@@ -13,8 +13,7 @@
       <hr>
     </div>
   </div>
-  <div masonry preserve-order class="row">
-    <div infinite-scroll='loadMore()' infinite-scroll-disabled='noMore()'>
+  <div masonry preserve-order class="row" infinite-scroll='loadMore()' infinite-scroll-disabled='noMore()' infinite-scroll-distance='0'>
       <div class="col-md-3 col-xs-6 col-xxs col-sm-4 masonry-brick" ng-repeat="r in newrecipes">
         <div class="recipe-invis">
           <div class="recipe-box">
@@ -34,6 +33,5 @@
           </div><!-- ingredient block -->
         </div><!-- recipe invis-->        
       </div>
-    </div>
   </div>
 </div>
