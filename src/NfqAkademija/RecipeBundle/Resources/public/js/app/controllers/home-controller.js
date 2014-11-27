@@ -29,6 +29,7 @@ recipeApp
         };
 
         $scope.recipesArrange = function(newRecipes) {
+
             if (!($scope.recipes instanceof Array)) {
                 $scope.recipes = newRecipes;
                 return;
@@ -49,16 +50,32 @@ recipeApp
                 i++;
             }
         };
-
-        $scope.$watchCollection('tags', function(newValue, oldValue, $scope) {
-            var promesa = recipesFactory.get(newValue);
+        $scope.$watchCollection('tags', function(newValue, oldValue, $scope) {            var promesa = recipesFactory.get(newValue);
             promesa.then(function(value) {
                 $scope.recipesArrange(value);
+                $scope.newrecipes = [];
+                for (var i = 0; i < 4; i++){
+                    $scope.newrecipes.push($scope.recipes[i])
+                };
+                $scope.loadMore = function() {
+                    var last = $scope.newrecipes.length - 1;
+                    for(var i = 1; i <= 4; i++) {
+                        if (typeof $scope.recipes[last+i] == 'undefined'){
+                            $scope.noMore = function(){
+                                return true;
+                            };             
+                        } else {
+                            $scope.newrecipes.push($scope.recipes[last + i]); 
+                        }
+                    }
+                };
+                $scope.noMore = function(){
+                    return false;
+                };
             }, function(reason) {
                 $scope.error = reason;
             });
-        });
-
+        });      
     })
 
     .controller('showController', function($scope, $routeParams, recipesFactory, $location) {

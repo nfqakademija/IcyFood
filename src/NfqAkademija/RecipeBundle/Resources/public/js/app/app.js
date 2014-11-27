@@ -1,4 +1,4 @@
-var recipeApp = angular.module('recipeApp',['ngRoute', 'ngTagsInput', 'ui.bootstrap', 'wu.masonry']);
+var recipeApp = angular.module('recipeApp',['ngRoute', 'ngTagsInput', 'ui.bootstrap', 'wu.masonry', 'infinite-scroll']);
 recipeApp.config(function($routeProvider, $locationProvider, tagsInputConfigProvider) {
     $routeProvider
         // route for the home page
