@@ -1,5 +1,8 @@
-var recipeApp = angular.module('recipeApp',['ngTagsInput', 'ui.bootstrap', 'ui.router', 'wu.masonry', 'infinite-scroll']);
-recipeApp.config(function($urlRouterProvider, $stateProvider, tagsInputConfigProvider) {
+var recipeApp = angular.module('recipeApp',['angular-loading-bar', 'ngTagsInput', 'ui.bootstrap', 'ui.router', 'wu.masonry', 'infinite-scroll']);
+recipeApp.config(function(cfpLoadingBarProvider, $urlRouterProvider, $stateProvider, tagsInputConfigProvider, $locationProvider) {
+
+    cfpLoadingBarProvider.includeSpinner = false;
+
     // $routeProvider
     //     // route for the home page
     //     .when('/', {
@@ -13,9 +16,9 @@ recipeApp.config(function($urlRouterProvider, $stateProvider, tagsInputConfigPro
     //     })
     //     .otherwise({redirectTo: '/'});
 
-    // $locationProvider
+    $locationProvider
     //     // dont use hashtags for urls
-    //     .html5Mode(true);
+         .html5Mode(true);
 
     // 
     $urlRouterProvider.otherwise('/');
@@ -55,7 +58,7 @@ recipeApp.config(function($urlRouterProvider, $stateProvider, tagsInputConfigPro
     })
     .state('show', {
         parent: 'modal',
-        url: '/show/{id:int}',
+        url: 'show/{id:int}',
         views: {
             'modal@': {
                 templateUrl: '/part/show.html',
