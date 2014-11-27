@@ -174,3 +174,4 @@ div.tags-bottom-list{
     background:none;
     width:100%;
 }
+.fb-comments, .fb-comments span, .fb-comments iframe { width: 100% !important; }
