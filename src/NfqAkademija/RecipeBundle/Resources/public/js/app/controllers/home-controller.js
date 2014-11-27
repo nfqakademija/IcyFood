@@ -82,6 +82,8 @@ recipeApp
         var promesa = recipesFactory.getRecipe($stateParams.id);
         promesa.then(function(value){
             $scope.r = value;
+            $scope.absurl = $location.absUrl();
+            console.log($location.absUrl());
         }, function(reason) {
             $scope.errors = reason;
         })
