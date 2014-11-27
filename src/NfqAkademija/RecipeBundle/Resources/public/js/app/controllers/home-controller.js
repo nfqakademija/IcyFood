@@ -80,10 +80,10 @@ recipeApp
 
     .controller('showController', function($scope, $stateParams, recipesFactory, $location) {
         var promesa = recipesFactory.getRecipe($stateParams.id);
+        $scope.absurl = $location.absUrl();
+        console.log($scope.absurl)
         promesa.then(function(value){
             $scope.r = value;
-            $scope.absurl = $location.absUrl();
-            console.log($location.absUrl());
         }, function(reason) {
             $scope.errors = reason;
         })
