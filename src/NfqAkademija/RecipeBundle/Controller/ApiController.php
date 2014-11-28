@@ -58,24 +58,13 @@ class ApiController extends Controller
 
     /**
      * Takes post data as ["Kiaušiniai", "Aliejus"]
-     * Returns a json encoded array:
-     *      [
-     *          { "recipe": {
-     *                          "id": <id>,
-     *                          "name": <name>,
-     *                          ...
-     *                      },
-     *            "koef": <koeficientas>
-     *          },
-     *          ...
-     *      ]
-     *
      * @Post("/recipes")
      */
     public function postRecipesAction(Request $request)
     {
         $content = $request->getContent();
-        $ingredients = json_decode($content, true);
+        $json = json_decode($content, true);
+        $ingredients = $json["ingredients"];
 
         $em = $this->getDoctrine()->getManager();
         $ingredientRepo = $em->getRepository('RecipeBundle:Ingredient');
@@ -85,9 +74,9 @@ class ApiController extends Controller
             return $recipeRepo->getOrderedByIngredients(new ArrayCollection());
         }
 
-        $ingredients = array_map(function($i){return $i["name"];},$ingredients);
+        $ingredients = array_map(function($i){return $i["id"];},$ingredients);
         $ingredientColl = new ArrayCollection(
-            $ingredientRepo->findBy(array('name' => $ingredients))
+            $ingredientRepo->findBy(array('id' => $ingredients))
         );
         $recipes = $recipeRepo->getOrderedByIngredients($ingredientColl);
         $ratingService = $this->container->get('recipe.rating');
