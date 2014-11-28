@@ -75,11 +75,12 @@ recipeApp
             }, function(reason) {
                 $scope.error = reason;
             });
-        });      
+        });    
     })
 
     .controller('showController', function($scope, $stateParams, recipesFactory, $location) {
         var promesa = recipesFactory.getRecipe($stateParams.id);
+        $scope.absurl = $location.absUrl();
         promesa.then(function(value){
             $scope.r = value;
         }, function(reason) {
@@ -133,8 +134,17 @@ recipeApp
     .directive('fbComments', function() {
         return {
             restrict: 'C',
-            link: function(scope, element, attributes) { 
-                element[0].dataset.href = document.location.href;
+            link: function($scope, element, attributes) { 
+                element[0].dataset.href = $scope.absurl;
+                return typeof FB !== "undefined" && FB !== null ? FB.XFBML.parse(element.parent()[0]) : void 0;
+            }
+        }
+    })
+    .directive('fbLike', function() {
+        return {
+            restrict: 'C',
+            link: function($scope, element, attributes) { 
+                element[0].dataset.href = $scope.absurl;
                 return typeof FB !== "undefined" && FB !== null ? FB.XFBML.parse(element.parent()[0]) : void 0;
             }
         }

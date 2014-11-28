@@ -1,45 +1,33 @@
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '739661786122356',
-      xfbml      : true,
-      version    : 'v2.2'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/lt_LT/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
 <div class="row recipe">
   <div class="col-md-12">
-    <a href="#" ng-click="$close()">Close</a>
     <div class="error">
       <p ng-repeat="error in errors">{{error.message}}</p>
     </div>
-    <h4>{{r.recipe.name}}</h4>
-    <div ng-controller="RatingCtrl">
-      <rating class="rating" ng-style="success" ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" ng-click="setRating(r.recipe.id)"></rating>
+    <div class="modal-header">
+      <a href="#" ng-click="$close()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+      <h3>{{r.recipe.name}}</h3>
+      <div ng-controller="RatingCtrl">
+        <rating class="rating" ng-style="success" ng-model="rate" max="max" state-on="'glyphicon-star star-full'" state-off="'glyphicon-star star-empty'" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" ng-click="setRating(r.recipe.id)"></rating>
+      </div>
+      <div class="fb-like" data-href="{{absurl}}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
     </div>
-    <div class="fb-like" data-share="true" data-width="450" data-show-faces="true" style="display: inline-block"></div>
-    <div class="thumbnail" style="display: inline-block">
-      <img ng-cloak ng-src="/{{r.recipe.image}}">
+    <div class="modal-body">
+      <div class="thumbnail" style="display: inline-block">
+        <img ng-cloak ng-src="/{{r.recipe.image}}">
+      </div>
+      <div class="instructions">
+        {{r.recipe.instructions}}
+      </div>
+      <div class="ingredients">
+        <ul>
+          <li ng-repeat="ingredient in r.recipe.ingredients">
+            {{ingredient.name}} ({{ingredient.quantity}} {{ingredient.unit}})
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <div class="fb-comments" data-href="{{absurl}}" data-numposts="10" data-colorscheme="light" data-width="100%" id="commentbox"></div>
+      </div>
     </div>
-    <div class="instructions">
-      {{r.recipe.instructions}}
-    </div>
-    <div class="ingredients">
-      <ul>
-        <li ng-repeat="ingredient in r.recipe.ingredients">
-          {{ingredient.name}} ({{ingredient.quantity}} {{ingredient.unit}})
-        </li>
-      </ul>
-    </div>
-    <div class="fb-comments" data-href="{{getLocation()}}" data-numposts="10" data-colorscheme="light" data-width="580" id="commentbox"></div>
   </div>
 </div>

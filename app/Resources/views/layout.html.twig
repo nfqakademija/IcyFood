@@ -35,14 +35,15 @@
         '@RecipeBundle/Resources/public/js/angular-masonry.min.js'
         '@RecipeBundle/Resources/public/js/ng-infinite-scroll.js'
         '@RecipeBundle/Resources/public/js/angular-ui-router.js'
+        '@RecipeBundle/Resources/public/js/fb.js'
         '@RecipeBundle/Resources/public/js/*'
         %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
     {% endblock %}
 </head>
-<body>
-
+<body class="">
+<div id="fb-root"></div>
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default" role="navigation">
     <div class="container">
@@ -68,6 +69,7 @@
     
     <!-- <div ng-view ng-cloak class="ng-cloak"></div> -->
     <div ui-view></div>
+
 
 
 </body>

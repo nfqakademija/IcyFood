@@ -1,0 +1,118 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}Naujas receptas{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    {{ form(form) }}
+
+                    {#{{ form_start(form, { 'attr': {'class': 'form-horizontal'} }) }}
+                    {{ form_errors(form) }}
+                        <fieldset>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                {{ form_label(form.name, null, { 'label_attr': {'class': 'col-sm-2 control-label'} }) }}
+                                <div class="col-sm-6">
+                                    {{ form_widget(form.name, { 'attr': {'class': 'form-control input-md'} }) }}
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                {{ form_label(form.image, null, { 'label_attr': {'class': 'col-sm-2 control-label'} }) }}
+                                <div class="col-sm-6">
+                                    {{ form_widget(form.image, { 'attr': {'class': 'form-control input-md'} }) }}
+                                </div>
+                            </div>
+
+                            <!-- Textarea -->
+                            <div class="form-group">
+                                {{ form_label(form.instructions, null, { 'label_attr': {'class': 'col-sm-2 control-label'} }) }}
+                                <div class="col-sm-6">
+                                    {{ form_widget(form.instructions, { 'attr': {'class': 'form-control'} }) }}
+                                </div>
+                            </div>
+
+                            <!-- Button -->
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    {{ form_widget(form.save, { 'attr': {'class': 'btn btn-default'} }) }}
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    {{ form_end(form) }}#}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var $collectionHolder;
+        var $collectionHolder1;
+
+        // setup an "add a tag" link
+        var $addTagLink = $('<a href="#" id="img_prot" class="add_tag_link">Pridėti</a>');
+        var $addTagLink1 = $('<a href="#" id="ing_prot" class="add_tag_link">Pridėti</a>');
+        var $newLinkLi = $('<div></div>').append($addTagLink);
+        var $newLinkLi1 = $('<div></div>').append($addTagLink1);
+
+        function addTagForm($collectionHolder, $newLinkLi) {
+            // Get the data-prototype explained earlier
+            var prototype = $collectionHolder.data('prototype');
+
+            // get the new index
+            var index = $collectionHolder.data('index');
+
+            // Replace '__name__' in the prototype's HTML to
+            // instead be a number based on how many items we have
+            var newForm = prototype.replace(/__name__/g, index);
+
+            // increase the index with one for the next item
+            $collectionHolder.data('index', index + 1);
+
+            // Display the form in the page in an li, before the "Add a tag" link li
+            var $newFormLi = $('<div></div>').append(newForm);
+            $newLinkLi.before($newFormLi);
+        }
+
+        jQuery(document).ready(function() {
+            // Get the ul that holds the collection of tags
+            $collectionHolder = $('#nfqakademija_recipebundle_recipe_images');
+            $collectionHolder1 = $('#nfqakademija_recipebundle_recipe_ingredients');
+
+            // add the "add a tag" anchor and li to the tags ul
+            $collectionHolder.append($newLinkLi);
+            $collectionHolder1.append($newLinkLi1);
+
+            // count the current form inputs we have (e.g. 2), use that as the new
+            // index when inserting a new item (e.g. 2)
+            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+            $collectionHolder1.data('index', $collectionHolder1.find(':input').length);
+
+            $addTagLink.on('click', function(e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // add a new tag form (see next code block)
+                addTagForm($collectionHolder, $newLinkLi);
+            });
+
+            $addTagLink1.on('click', function(e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // add a new tag form (see next code block)
+                addTagForm($collectionHolder1, $newLinkLi1);
+            });
+
+
+        });
+
+    </script>
+{% endblock %}
