@@ -139,4 +139,13 @@ recipeApp
                 return typeof FB !== "undefined" && FB !== null ? FB.XFBML.parse(element.parent()[0]) : void 0;
             }
         }
+    })
+    .directive('fbLike', function() {
+        return {
+            restrict: 'C',
+            link: function($scope, element, attributes) { 
+                element[0].dataset.href = $scope.absurl;
+                return typeof FB !== "undefined" && FB !== null ? FB.XFBML.parse(element.parent()[0]) : void 0;
+            }
+        }
     });
