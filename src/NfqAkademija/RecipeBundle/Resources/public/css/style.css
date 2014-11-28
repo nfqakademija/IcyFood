@@ -181,5 +181,6 @@ div.tags-bottom-list{
 .star-empty{
     color:#e2e6e7;
 }
-
-.fb-comments, .fb-comments span, .fb-comments iframe { width: 100% !important; }
+.fb-comments, .fb-comments span, .fb-comments iframe { 
+    width: 100% !important; 
+}
