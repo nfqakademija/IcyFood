@@ -105,11 +105,7 @@ recipeApp
         };
 
         $scope.ratingStates = [
-            {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
-            {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
-            {stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
-            {stateOn: 'glyphicon-heart'},
-            {stateOff: 'glyphicon-off'}
+            {stateOn: 'glyphicon-star star-full', stateOff: 'glyphicon-star star-empty'}
         ];
 
         $scope.setRating = function(id) {

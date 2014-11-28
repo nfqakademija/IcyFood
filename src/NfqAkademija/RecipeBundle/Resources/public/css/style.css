@@ -173,4 +173,13 @@ div.tags-bottom-list{
     background:none;
     width:100%;
 }
+
+.star-full{
+    color:#f1c40f;
+}
+
+.star-empty{
+    color:#e2e6e7;
+}
+
 .fb-comments, .fb-comments span, .fb-comments iframe { width: 100% !important; }
