@@ -2,6 +2,8 @@
 recipeApp.factory('recipesFactory', function($q, $http) {
 
     var get = function (tags, offset, limit) {
+        offset = typeof offset !== 'undefined' ? offset : 0;
+        limit = typeof limit !== 'undefined' ? limit : 4;
         var deferred = $q.defer();
         var vars = {
             ingredients: tags,

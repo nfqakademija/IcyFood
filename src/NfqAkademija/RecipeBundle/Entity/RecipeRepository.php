@@ -14,74 +14,23 @@ use Doctrine\ORM\EntityRepository;
  */
 class RecipeRepository extends EntityRepository
 {
-    /**
-     * @param ArrayCollection $ingredients
-     * @return array
-     */
-    public function getOrderedByIngredients($ingredients)
+    public function getByIngredients($ingredientIds, $offset = 0, $limit = 0)
     {
-        if($ingredients->isEmpty()) {
-            return $this->findAllCustom();
-        }
-
-        $moreIngredients = $ingredients;
-        foreach ($ingredients as $ingredient) {
-            $moreIngredients = new ArrayCollection(
-                array_merge(
-                    $moreIngredients->toArray(),
-                    $ingredient->getParentsAndChildren()->toArray()
-                )
-            );
-        }
-        $ingredientsArray = $moreIngredients->map(function($i){return $i->getName();})->toArray();
-
         $em = $this->getEntityManager();
-
-        // get recipes with at least one ingredient from the $ingredients array
         $query = $em->createQuery("
 
-            SELECT r recipe, COUNT(i.id)/SIZE(r.ingredients) koef, SIZE(r.ingredients)-COUNT(i.id) missing
+            SELECT r recipe, COUNT(ri.id)/SIZE(r.ingredients) koef, SIZE(r.ingredients)-COUNT(ri.id) missing
             FROM RecipeBundle:Recipe r
             LEFT JOIN r.ingredients ri
-            LEFT JOIN ri.ingredient i
-            WHERE i.name IN (:ing)
+                WITH ri.ingredient IN (:ids)
             GROUP BY r
             ORDER BY missing ASC
 
-        ")->setParameter('ing', $ingredientsArray);
+        ")
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->setParameter('ids', $ingredientIds);
 
-        $goodRecipes = $query->getResult();
-
-        // put recipes' ids to an $goodIDs
-        $goodIDs = [];
-        foreach($goodRecipes as $recipe){
-            $goodIDs[] = $recipe['recipe']->getId();
-
-        }
-
-        if(empty($goodIDs)){
-            return $this->findAllCustom();
-        }
-
-        // get recipes that were not taken by the first query
-        $query = $em->createQuery("
-
-            SELECT r recipe, 0 koef, SIZE(r.ingredients) missing
-            FROM RecipeBundle:Recipe r
-            WHERE r.id NOT IN (:ids)
-
-        ")->setParameter('ids', $goodIDs);
-
-        $otherRecipes = $query->getResult();
-
-        // merge both recipe-lists to one
-        $recipes = array_merge($goodRecipes, $otherRecipes);
-
-        return $recipes;
-    }
-
-    public function findAllCustom()
-    {
-        return array_map(function($i){return ['recipe' => $i, 'koef' => 0, 'missing' => 0];}, $this->findAll());
+        return $query->getResult();
     }
 }

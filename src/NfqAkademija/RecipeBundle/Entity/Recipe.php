@@ -171,6 +171,8 @@ class Recipe
      * Get normalized ingredients
      *
      * @return array
+
+
      */
     public function getIngredientsNormalized()
     {

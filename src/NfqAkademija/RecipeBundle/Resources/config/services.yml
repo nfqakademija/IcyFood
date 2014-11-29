@@ -3,3 +3,8 @@ services:
         class: NfqAkademija\RecipeBundle\Services\RatingService
         arguments:
             em: "@doctrine"
+
+    recipe.service:
+        class: NfqAkademija\RecipeBundle\Services\RecipeService
+        arguments:
+            em: "@doctrine"

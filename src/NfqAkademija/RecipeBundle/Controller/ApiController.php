@@ -68,17 +68,17 @@ class ApiController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $ingredientRepo = $em->getRepository('RecipeBundle:Ingredient');
-        $recipeRepo     = $em->getRepository('RecipeBundle:Recipe');
+        $recipeService = $this->container->get('recipe.service');
 
         if(!is_array($ingredients)) {
-            return $recipeRepo->getOrderedByIngredients(new ArrayCollection());
+            return $recipeService->getRecipesByIngredients(new ArrayCollection(), $json["offset"], $json["limit"]);
         }
 
         $ingredients = array_map(function($i){return $i["id"];},$ingredients);
         $ingredientColl = new ArrayCollection(
             $ingredientRepo->findBy(array('id' => $ingredients))
         );
-        $recipes = $recipeRepo->getOrderedByIngredients($ingredientColl);
+        $recipes = $recipeService->getRecipesByIngredients($ingredientColl, $json["offset"], $json["limit"]);
         $ratingService = $this->container->get('recipe.rating');
         $recipes = $ratingService->addRatingByIpAll($this->container->get('request')->getClientIp(), $recipes);
 
