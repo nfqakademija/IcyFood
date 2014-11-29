@@ -158,6 +158,16 @@ class Recipe
     }
 
     /**
+     * Set ingredients custom
+     * @param array $ingredients
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function setIngredientsCustom($ingredients)
+    {
+        $this->ingredients = $ingredients;
+    }
+
+    /**
      * Get ingredients
      *
      * @return \Doctrine\Common\Collections\Collection 

@@ -25,6 +25,7 @@ class RecipeService
     {
         $em = $this->managerRegistry->getManagerForClass('RecipeBundle:Recipe');
         $rRepo = $em->getRepository('RecipeBundle:Recipe');
+        $riRepo = $em->getRepository('RecipeBundle:RecipeIngredient');
 
         if($ingredients->isEmpty()) {
             return $rRepo->getByIngredients([], $offset, $limit);
@@ -34,6 +35,10 @@ class RecipeService
         $ingIds = $moreIngredients->map(function($i){return $i->getId();})->toArray();
 
         $recipes = $rRepo->getByIngredients($ingIds, $offset, $limit);
+
+        foreach($recipes as &$recipe){
+            $recipe["recipe"]->setIngredientsCustom(new ArrayCollection($riRepo->getIngredients($recipe["recipe"]->getId())));
+        }
 
         return $recipes;
     }
