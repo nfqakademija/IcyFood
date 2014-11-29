@@ -70,10 +70,6 @@ class ApiController extends Controller
         $ingredientRepo = $em->getRepository('RecipeBundle:Ingredient');
         $recipeService = $this->container->get('recipe.service');
 
-        if(!is_array($ingredients)) {
-            return $recipeService->getRecipesByIngredients(new ArrayCollection(), $json["offset"], $json["limit"]);
-        }
-
         $ingredients = array_map(function($i){return $i["id"];},$ingredients);
         $ingredientColl = new ArrayCollection(
             $ingredientRepo->findBy(array('id' => $ingredients))

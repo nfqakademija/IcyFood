@@ -23,18 +23,25 @@ class RecipeService
      */
     public function getRecipesByIngredients($ingredients, $offset, $limit)
     {
-        $em = $this->managerRegistry->getManagerForClass('RecipeBundle:Recipe');
-        $rRepo = $em->getRepository('RecipeBundle:Recipe');
-        $riRepo = $em->getRepository('RecipeBundle:RecipeIngredient');
-
         if($ingredients->isEmpty()) {
-            return $rRepo->getByIngredients([], $offset, $limit);
+            return $this->beforeReturn([], $offset, $limit);
         }
 
         $moreIngredients = $this->expandIngredients($ingredients);
         $ingIds = $moreIngredients->map(function($i){return $i->getId();})->toArray();
 
-        $recipes = $rRepo->getByIngredients($ingIds, $offset, $limit);
+        $recipes = $this->beforeReturn($ingIds, $offset, $limit);
+
+        return $recipes;
+    }
+
+    private function beforeReturn($ids, $offset, $limit)
+    {
+        $em = $this->managerRegistry->getManagerForClass('RecipeBundle:Recipe');
+        $rRepo = $em->getRepository('RecipeBundle:Recipe');
+        $riRepo = $em->getRepository('RecipeBundle:RecipeIngredient');
+
+        $recipes = $rRepo->getByIngredients($ids, $offset, $limit);
 
         foreach($recipes as &$recipe){
             $recipe["recipe"]->setIngredientsCustom(new ArrayCollection($riRepo->getIngredients($recipe["recipe"]->getId())));
