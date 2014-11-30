@@ -18,14 +18,14 @@ class RecipeRepository extends EntityRepository
         $em = $this->getEntityManager();
         $query = $em->createQuery("
 
-            SELECT r recipe, rr, rv, rimg,  COUNT(ri.id)/SIZE(r.ingredients) koef, SIZE(r.ingredients)-COUNT(ri.id) missing
+            SELECT r recipe, rr, rv, rimg,  COUNT(DISTINCT ri.id)/SIZE(r.ingredients) koef, SIZE(r.ingredients)-COUNT(DISTINCT ri.id) missing
             FROM RecipeBundle:Recipe r
             LEFT JOIN r.ingredients ri
                 WITH ri.ingredient IN (:ids)
             LEFT JOIN r.recipeRating rr
             LEFT JOIN r.votes rv
             LEFT JOIN r.images rimg
-            GROUP BY r
+            GROUP BY r.id
             ORDER BY missing ASC
 
         ")
