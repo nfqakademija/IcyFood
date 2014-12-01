@@ -58,16 +58,20 @@ recipeApp
                     $scope.newrecipes.push($scope.recipes[i])
                 };
                 $scope.loadMore = function() {
-                    var last = $scope.newrecipes.length - 1;
-                    for(var i = 1; i <= 4; i++) {
-                        if (typeof $scope.recipes[last+i] == 'undefined'){
-                            $scope.noMore = function(){
-                                return true;
-                            };             
-                        } else {
-                            $scope.newrecipes.push($scope.recipes[last + i]); 
+                    var last = $scope.newrecipes.length;
+                    var promesa1 = recipesFactory.get(newValue, last, 4);
+                    promesa1.then(function(value){
+                        $scope.recipesArrange(value);
+                        for(var i = 0; i < 4; i++) {
+                            if (typeof $scope.recipes[i] == 'undefined'){
+                                $scope.noMore = function(){
+                                    return true;
+                                };             
+                            } else {
+                                $scope.newrecipes.push($scope.recipes[i]); 
+                            }
                         }
-                    }
+                    });
                 };
                 $scope.noMore = function(){
                     return false;
@@ -75,7 +79,7 @@ recipeApp
             }, function(reason) {
                 $scope.error = reason;
             });
-        });    
+        });  
     })
 
     .controller('showController', function($scope, $stateParams, recipesFactory, $location) {
