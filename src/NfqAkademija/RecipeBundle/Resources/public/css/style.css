@@ -23,6 +23,9 @@ div.recipe-box h4 a{
     font-weight:600;
 }
 
+div.recipe-box, div.ingredient_block, div.recipe-invis{
+     max-width:300px;
+}
 
 /* navbar */
 .navbar-default {

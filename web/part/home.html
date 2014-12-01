@@ -14,7 +14,7 @@
     </div>
   </div>
   <div masonry preserve-order class="row" infinite-scroll='loadMore()' infinite-scroll-disabled='noMore()' infinite-scroll-distance='0'>
-      <div class="col-md-3 col-xs-6 col-xxs col-sm-4 masonry-brick" ng-repeat="r in newrecipes">
+      <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6 col-xxs masonry-brick" ng-repeat="r in newrecipes">
         <div class="recipe-invis">
           <div class="recipe-box">
             <a href="" ui-sref="show({id: r.recipe.id})"><img class="img-responsive" ng-src="/{{r.recipe.image}}"></a>
