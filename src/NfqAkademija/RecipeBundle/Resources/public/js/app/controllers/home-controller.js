@@ -2,6 +2,7 @@ recipeApp
     .controller('homeController', function($scope, $http, recipesFactory) {
 
         $scope.tags = [];
+        $scope.scrollBusy = false;
 
         $scope.loadTags = function(query) {
             return $http.get('/api/ingredients/filter/' + query);
@@ -36,7 +37,8 @@ recipeApp
             }
             var i=0;
             while ( i<$scope.recipes.length) {
-                while ($scope.recipes[i].recipe.id != newRecipes[i].recipe.id) {
+                var newId = (i<newRecipes.length) ? newRecipes[i].recipe.id : null;
+                while ($scope.recipes[i].recipe.id != newId) {
                     $scope.recipes.splice(i,1);
                     if (typeof $scope.recipes[i] == 'undefined') {
                         i--;
@@ -50,31 +52,22 @@ recipeApp
                 i++;
             }
         };
-        $scope.$watchCollection('tags', function(newValue, oldValue, $scope) {            var promesa = recipesFactory.get(newValue);
+        $scope.$watchCollection('tags', function(newValue, oldValue, $scope) {
+            var promesa = recipesFactory.get(newValue);
             promesa.then(function(value) {
                 $scope.recipesArrange(value);
-                $scope.newrecipes = [];
-                for (var i = 0; i < 4; i++){
-                    $scope.newrecipes.push($scope.recipes[i])
-                };
+                $scope.scrollBusy = false;
                 $scope.loadMore = function() {
-                    var last = $scope.newrecipes.length;
+                    if ($scope.scrollBusy) return;
+                    $scope.scrollBusy = true;
+                    var last = $scope.recipes.length;
                     var promesa1 = recipesFactory.get(newValue, last, 4);
                     promesa1.then(function(value){
-                        $scope.recipesArrange(value);
-                        for(var i = 0; i < 4; i++) {
-                            if (typeof $scope.recipes[i] == 'undefined'){
-                                $scope.noMore = function(){
-                                    return true;
-                                };             
-                            } else {
-                                $scope.newrecipes.push($scope.recipes[i]); 
-                            }
+                        for(var i = 0; i < value.length; i++) {
+                            $scope.recipes.push(value[i]);
                         }
+                        $scope.scrollBusy = value.length == 0;
                     });
-                };
-                $scope.noMore = function(){
-                    return false;
                 };
             }, function(reason) {
                 $scope.error = reason;
