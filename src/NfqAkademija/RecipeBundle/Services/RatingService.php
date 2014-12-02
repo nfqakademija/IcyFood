@@ -24,7 +24,7 @@ class RatingService
     {
         $readOnly = false;
         $rating = 0;
-        $total = "";
+        $total = 0;
 
         $recipeRating = $r["recipe"]->getRecipeRating();
         if($recipeRating){
@@ -38,8 +38,6 @@ class RatingService
             foreach($votes as $vote){
                 if ($ip == $vote->getIp()) {
                     $readOnly = true;
-                    $rating = $vote->getGrade();
-                    $total = "";
                 }
             }
         }
