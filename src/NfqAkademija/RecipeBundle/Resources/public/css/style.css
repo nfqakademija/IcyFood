@@ -121,16 +121,6 @@ div.jumbotron h1{
     text-align: center;
 }
 
-div#jumbo-bottom{
-    width:100%;
-    height:auto;
-    background-color: rgba(0,0,0,0.4);
-    position:absolute;
-    bottom:0px;
-    padding-top:3px;
-    left:0px;
-}
-
 div.ingredient_block{
     background:#fbfbf8;
     margin-top:0px;
@@ -171,11 +161,13 @@ span.input-group-addon{
    }
 }
 
-div.tags-bottom-list{
+div.tag-sidebar{
     background:none;
-    width:100%;
-    overflow-x:auto;
-    white-space:nowrap;
+    padding:0px;
+}
+
+div.tag-sidebar > a{
+    background:none;
 }
 
 .star-full{
@@ -187,4 +179,74 @@ div.tags-bottom-list{
 }
 .fb-comments, .fb-comments span, .fb-comments iframe { 
     width: 100% !important; 
+}
+
+/* Sidebar */
+#sidebar{
+    position:fixed;
+    z-index:99999;
+    top:30%;
+    left:0px;
+
+}
+
+#sidebar a{
+    display:block;
+    padding:5px;
+    text-align:center;
+    background:#0192b5;
+    padding:10px;
+    float:left;
+    cursor:pointer;
+    border-bottom-right-radius:5px;
+    border-top-right-radius:5px;
+    font-size:18px;
+    color:white;
+}
+
+#sidebar-content .tags{
+    background:white;
+    border:none;
+    box-shadow:none;
+    max-width:260px;
+}
+
+#sidebar-content .tags .tag-list .tag-item > a{
+    background:#0192B5;
+    color:white;
+    padding:0px;
+    padding-top:9px;
+    padding-right:5px;
+}
+
+#sidebar-content .tags .tag-list .tag-item{
+    font-size:16px;
+    background:#0192B5;
+    color:white;
+    display:block;
+}
+
+
+#sidebar-content{
+    background:white;
+    float:left;
+    -webkit-box-shadow: 0px 3px 5px 0px rgba(50, 50, 50, 0.34);
+    -moz-box-shadow:    0px 3px 5px 0px rgba(50, 50, 50, 0.34);
+    box-shadow:         0px 3px 5px 0px rgba(50, 50, 50, 0.34);
+    display:none;
+    overflow-y:auto;
+}
+
+
+#sidebar-content p{
+    color:black;
+    margin:10px 10px 5px 10px;
+    font-weight:bold;
+    line-height:10px;
+    font-size:16px;
+    text-align:center;
+}
+
+#sidebar-content hr{
+    margin-bottom:5px;
 }

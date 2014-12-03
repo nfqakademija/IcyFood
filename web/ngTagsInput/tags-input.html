@@ -18,14 +18,40 @@
       </div>
     </div>
   </div>
-  <div id="jumbo-bottom">
 
-        <div class="tags tags-bottom-list">
+
+  
+
+
+<div id="sidebar">
+<div id="sidebar-content">
+<p>Mano Ingredientai</p>
+<hr>
+    <div class="tags">
           <ul class="tag-list">
             <li class="tag-item" ng-repeat="tag in tagList.items track by track(tag)" ng-class="{ selected: tag == tagList.selected }">
               <span ng-bind="getDisplayText(tag)"></span>
-              <a class="remove-button" ng-click="tagList.remove($index)" ng-bind="options.removeTagSymbol"></a>
+              <a class="remove-button preventDefault" ng-click="tagList.remove($index)" ng-bind="options.removeTagSymbol"></a>
             </li>
           </ul>
           </div> <!-- tags -->
-    </div>
+  </div>
+  <a id="sidebar-button"><span class="glyphicon glyphicon-align-justify"></span></a>
+  
+</div>
+
+<script type="text/javascript">
+
+  $('.tag-list').poink({
+    selector: ".tag-item",
+    callback: function(element) {
+      $("#sidebar-content").show("fast");
+    }
+  });
+
+  $("#sidebar-button").click(function(){
+      $("#sidebar-content").animate({width:'toggle'},150);
+      return false;    
+  });
+
+</script>
