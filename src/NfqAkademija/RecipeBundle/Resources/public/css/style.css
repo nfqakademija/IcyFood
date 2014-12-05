@@ -187,10 +187,17 @@ div.tag-sidebar > a{
     z-index:99999;
     top:30%;
     left:0px;
-
+    height:70%;
+    pointer-events:none;
 }
 
-#sidebar a{
+#sidebar-content h4{
+    color:gray;
+    font-weight:normal;
+    text-align: center;
+}
+
+#sidebar-button{
     display:block;
     padding:5px;
     text-align:center;
@@ -202,51 +209,45 @@ div.tag-sidebar > a{
     border-top-right-radius:5px;
     font-size:18px;
     color:white;
+    pointer-events:auto;
+}
+
+#sidebar-content{
+    display:none;
+    float:left;
+    background:white;
+    max-width:320px;
+    height:100%;
+    pointer-events:auto;
+    overflow:hidden;
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(50, 50, 50, 0.62);
+    -moz-box-shadow:    0px 0px 8px 0px rgba(50, 50, 50, 0.62);
+    box-shadow:         0px 0px 8px 0px rgba(50, 50, 50, 0.62);
+    
 }
 
 #sidebar-content .tags{
-    background:white;
-    border:none;
-    box-shadow:none;
-    max-width:260px;
+    height:100%
 }
 
-#sidebar-content .tags .tag-list .tag-item > a{
-    background:#0192B5;
-    color:white;
-    padding:0px;
-    padding-top:9px;
-    padding-right:5px;
-}
-
-#sidebar-content .tags .tag-list .tag-item{
-    font-size:16px;
-    background:#0192B5;
-    color:white;
+#sidebar-content .tags .tag-list{
+   
     display:block;
-}
-
-
-#sidebar-content{
-    background:white;
-    float:left;
-    -webkit-box-shadow: 0px 3px 5px 0px rgba(50, 50, 50, 0.34);
-    -moz-box-shadow:    0px 3px 5px 0px rgba(50, 50, 50, 0.34);
-    box-shadow:         0px 3px 5px 0px rgba(50, 50, 50, 0.34);
-    display:none;
+    overflow:hidden;
     overflow-y:auto;
+    height:100%;
+    width:200px;
+    
 }
 
-
-#sidebar-content p{
-    color:black;
-    margin:10px 10px 5px 10px;
-    font-weight:bold;
-    line-height:10px;
-    font-size:16px;
-    text-align:center;
+#sidebar-content .tags .tag-list .tag-item
+{
+    display:block;
+    background:#0192b5;
+    color:white;
 }
 
-#sidebar-content hr{
-    margin-bottom:5px;
+#sidebar-content .tags .tag-list .tag-item a{
+    color:white;
 }
+

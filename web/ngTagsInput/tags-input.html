@@ -24,9 +24,9 @@
 
 
 <div id="sidebar">
-<div id="sidebar-content">
-<p>Mano Ingredientai</p>
-<hr>
+  
+  <div id="sidebar-content">
+  <h4>Mano ingredientai</h4>
     <div class="tags">
           <ul class="tag-list">
             <li class="tag-item" ng-repeat="tag in tagList.items track by track(tag)" ng-class="{ selected: tag == tagList.selected }">
@@ -34,17 +34,19 @@
               <a class="remove-button" ng-click="tagList.remove($index)" ng-bind="options.removeTagSymbol"></a>
             </li>
           </ul>
-          </div> <!-- tags -->
+  </div> <!-- tags -->
   </div>
   <a id="sidebar-button"><span class="glyphicon glyphicon-align-justify"></span></a>
-  
 </div>
 
 <script type="text/javascript">
 
+
+
   $('.tag-list').poink({
     selector: ".tag-item",
     callback: function(element) {
+
       $("#sidebar-content").show("fast");
     }
   });
