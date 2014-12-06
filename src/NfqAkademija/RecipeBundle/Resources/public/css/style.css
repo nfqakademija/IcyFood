@@ -199,10 +199,9 @@ div.tag-sidebar > a{
 
 #sidebar-button{
     display:block;
-    padding:5px;
     text-align:center;
     background:#0192b5;
-    padding:10px;
+    padding:6px;
     float:left;
     cursor:pointer;
     border-bottom-right-radius:5px;
