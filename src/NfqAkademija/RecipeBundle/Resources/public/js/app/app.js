@@ -67,7 +67,7 @@ recipeApp.config(function(cfpLoadingBarProvider, $urlRouterProvider, $stateProvi
     });
     tagsInputConfigProvider
         .setDefaults('tagsInput', {
-            placeholder: 'Surašykite jūsų turimus ingredientus',
+            placeholder: 'Ką turite šaldytuve?',
             displayProperty: 'name',
             addFromAutocompleteOnly: true,
             replaceSpacesWithDashes: false
