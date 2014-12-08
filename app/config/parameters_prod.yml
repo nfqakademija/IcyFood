@@ -1,4 +1,4 @@
 parameters:
     database_name: kaunas5
     database_user: kaunas5
-    database_password: parameters.yml
+    database_password: ooghoonailachabi
