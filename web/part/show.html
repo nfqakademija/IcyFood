@@ -4,8 +4,8 @@
       <p ng-repeat="error in errors">{{error.message}}</p>
     </div>
     <div class="modal-header">
-      <a href="#" ng-click="$close()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-      <h3>{{r.recipe.name}}</h3>
+      <button ng-click="$close()" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+      <h3 class="modal-title">{{r.recipe.name}}</h3>
       <div ng-controller="RatingCtrl">
         <rating class="rating" ng-style="success" ng-model="rate" max="max" state-on="'glyphicon-star star-full'" state-off="'glyphicon-star star-empty'" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" ng-click="setRating(r.recipe.id)"></rating>
       </div>
@@ -15,9 +15,7 @@
       <div class="thumbnail" style="display: inline-block">
         <img ng-cloak ng-src="/{{r.recipe.image}}">
       </div>
-      <div class="instructions">
-        {{r.recipe.instructions}}
-      </div>
+      <h4>Ingredientai</h4>
       <div class="ingredients">
         <ul>
           <li ng-repeat="ingredient in r.recipe.ingredients">
@@ -25,6 +23,12 @@
           </li>
         </ul>
       </div>
+      <hr>
+      <h4>Gaminimo eiga</h4>
+      <div class="instructions">
+        {{r.recipe.instructions}}
+      </div>
+      
       <div class="modal-footer">
         <div class="fb-comments" data-href="{{absurl}}" data-numposts="10" data-colorscheme="light" data-width="100%" id="commentbox"></div>
       </div>
