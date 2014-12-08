@@ -24,47 +24,57 @@ recipeApp.config(function(cfpLoadingBarProvider, $urlRouterProvider, $stateProvi
 
     var modal = null;
     $stateProvider
-    .state('home', {
-        url: '/',
-        views: {
-            '@': {
-                templateUrl: '/part/home.html',
-                controller: 'homeController'
+        .state('home', {
+            url: '/',
+            views: {
+                '@': {
+                    templateUrl: '/part/home.html',
+                    controller: 'homeController'
+                }
             }
-        }
-    })
-    .state('modal',{
-        abstract: true,
-        parent: 'home',
-        url: '',
-        onEnter: ['$modal', '$rootScope', '$state',
-            function($modal, $rootScope, $state){
-                modal = $modal.open({
-                    template: '<div ui-view="modal"></div>',
-                    backdrop: true
-                });
-                modal.result.finally(function(){
-                    modal: null;
-                    $state.go('home');
-                })
+        })
+        .state('modal',{
+            abstract: true,
+            parent: 'home',
+            url: '',
+            onEnter: ['$modal', '$rootScope', '$state',
+                function($modal, $rootScope, $state){
+                    modal = $modal.open({
+                        template: '<div ui-view="modal"></div>',
+                        backdrop: true
+                    });
+                    modal.result.finally(function(){
+                        modal: null;
+                        $state.go('home');
+                    })
+                }
+            ],
+            onExit: function(){
+                if(modal){
+                    modal.close();
+                }
             }
-        ],
-        onExit: function(){
-            if(modal){
-                modal.close();
+        })
+        .state('show', {
+            parent: 'modal',
+            url: 'show/{id:int}',
+            views: {
+                'modal@': {
+                    templateUrl: '/part/show.html',
+                    controller: 'showController'
+                }
             }
-        }
-    })
-    .state('show', {
-        parent: 'modal',
-        url: 'show/{id:int}',
-        views: {
-            'modal@': {
-                templateUrl: '/part/show.html',
-                controller: 'showController'
+        })
+        .state('naujas', {
+            parent: 'modal',
+            url: 'naujas',
+            views: {
+                'modal@': {
+                    templateUrl: '/part/form',
+                    controller: 'formController'
+                }
             }
-        }
-    });
+        });
     tagsInputConfigProvider
         .setDefaults('tagsInput', {
             placeholder: 'Ką turite šaldytuve?',

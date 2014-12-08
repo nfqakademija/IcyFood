@@ -85,6 +85,10 @@ recipeApp
         })
     })
 
+    .controller('formController', function($scope, $stateParams, recipesFactory, $location) {
+
+    })
+
     .controller('RatingCtrl', function ($scope, $http) {
 
         $scope.max = 5;

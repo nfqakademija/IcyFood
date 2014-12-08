@@ -14,7 +14,7 @@ use NfqAkademija\RecipeBundle\Services\ScrapeService;
 class AddRecipeController extends Controller
 {
     /**
-     * @Route("/form/naujas", name="new_recipe")
+     * @Route("/part/form", name="new_recipe")
      * @Template()
      */
     public function newAction()

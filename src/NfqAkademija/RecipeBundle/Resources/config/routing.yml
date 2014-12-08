@@ -3,12 +3,12 @@ api :
     resource: "@RecipeBundle/Controller/ApiController.php"
     prefix:   api/
 
-recipe_homepage:
-    resource: "@RecipeBundle/Controller/"
+new_recipe:
+    resource: "@RecipeBundle/Controller/AddRecipeController.php"
     type:     annotation
     prefix:   /
 
-new_recipe:
-    resource: "@RecipeBundle/Controller/"
+recipe_homepage:
+    resource: "@RecipeBundle/Controller/HomePageController.php"
     type:     annotation
     prefix:   /
