@@ -31,6 +31,23 @@ class AddRecipeController extends Controller
     }
 
     /**
+     * @Route("/form/naujas", name="new_recipe_simple")
+     * @Template()
+     */
+    public function newSimpleAction()
+    {
+        $recipe = new Recipe();
+        $form = $this->createForm(new RecipeType(), $recipe, array(
+            'action' => $this->generateUrl('new_recipe_submit'),
+        ));
+
+        return $this->render(
+            'RecipeBundle:AddRecipe:new_simple.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
+    /**
      * @Route("/form/naujas/submit", name="new_recipe_submit")
      * @Template()
      */
