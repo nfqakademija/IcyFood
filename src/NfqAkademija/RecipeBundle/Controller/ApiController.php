@@ -87,56 +87,58 @@ class ApiController extends Controller
      */
     public function postRatingAction(Request $request)
     {
-        $data = $request->getContent();
-        $voteData = json_decode($data, true);
+        $this->get('recipe.rating')->postRatingAction($request->getContent());
+        return;
+        // $data = $request->getContent();
+        // $voteData = json_decode($data, true);
 
-        $id = $voteData['id'];
-        $grade = $voteData['rating'];
-        $ip = $this->container->get('request')->getClientIp();
+        // $id = $voteData['id'];
+        // $grade = $voteData['rating'];
+        // $ip = $this->container->get('request')->getClientIp();
 
-        $em = $this->getDoctrine()->getManager();
-        $votes = $em->getRepository('RecipeBundle:Votes');
+        // $em = $this->getDoctrine()->getManager();
+        // $votes = $em->getRepository('RecipeBundle:Votes');
 
-        if($votes->hasUserVoted($voteData['id'], $ip)){
-            return false;
-        }
+        // if($votes->hasUserVoted($voteData['id'], $ip)){
+        //     return false;
+        // }
 
-        // Record user vote.
-        $recipe = $em->getRepository('RecipeBundle:recipe')->find($voteData['id']);
-        $votes = new Votes();
-        $votes->setRecipe($recipe);
-        $votes->setGrade($voteData['rating']);
-        $votes->setIp($ip);
-        $em->persist($votes);
-        $em->flush();
+        // // Record user vote.
+        // $recipe = $em->getRepository('RecipeBundle:recipe')->find($voteData['id']);
+        // $votes = new Votes();
+        // $votes->setRecipe($recipe);
+        // $votes->setGrade($voteData['rating']);
+        // $votes->setIp($ip);
+        // $em->persist($votes);
+        // $em->flush();
 
-        // Get old average rating
-        $recipe = $em->getRepository('RecipeBundle:Recipe')->find($id);
-        $recipeRating = $recipe->getRecipeRating();
+        // // Get old average rating
+        // $recipe = $em->getRepository('RecipeBundle:Recipe')->find($id);
+        // $recipeRating = $recipe->getRecipeRating();
 
-        // Average rating for that recipe does not exist so let's create one.
-        if(!$recipeRating){
-            $recipeRating = new RecipeRating();
-            $recipeRating->setRecipe($recipe);
-            $recipeRating->setAverage($grade);
-            $recipeRating->setTotal(1);
-            $em->persist($recipeRating);
-            $em->flush();
+        // // Average rating for that recipe does not exist so let's create one.
+        // if(!$recipeRating){
+        //     $recipeRating = new RecipeRating();
+        //     $recipeRating->setRecipe($recipe);
+        //     $recipeRating->setAverage($grade);
+        //     $recipeRating->setTotal(1);
+        //     $em->persist($recipeRating);
+        //     $em->flush();
 
-            return;
-        }
+        //     return;
+        // }
 
-        // Calculate new average rating.
-        $average = $recipeRating->getAverage();
-        $total = $recipeRating->getTotal();
-        $voteWeight = round($grade / ($total + 1), 2);
-        $avgWeight = round(($average / ($total + 1)) * $total, 2);
-        $newRating = $voteWeight + $avgWeight;
+        // // Calculate new average rating.
+        // $average = $recipeRating->getAverage();
+        // $total = $recipeRating->getTotal();
+        // $voteWeight = round($grade / ($total + 1), 2);
+        // $avgWeight = round(($average / ($total + 1)) * $total, 2);
+        // $newRating = $voteWeight + $avgWeight;
 
-        // Update rating.
-        $recipeRating->setAverage($newRating);
-        $recipeRating->setTotal($total + 1);
-        $em->flush();
+        // // Update rating.
+        // $recipeRating->setAverage($newRating);
+        // $recipeRating->setTotal($total + 1);
+        // $em->flush();
     }
 
 }

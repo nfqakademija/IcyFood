@@ -50,7 +50,7 @@ DirectoryIndex app_dev.php
         # When mod_rewrite is not available, we instruct a temporary redirect of
         # the start page to the front controller explicitly so that the website
         # and the generated links can still be used.
-        RedirectMatch 302 ^/$ /app.php/
+        RedirectMatch 302 ^/$ /app_dev.php/
         # RedirectTemp cannot be used instead
     </IfModule>
 </IfModule>
