@@ -8,8 +8,27 @@
 <div id="form_images" data-prototype="{{ form_widget(form.images.vars.prototype.name)|e('html_attr') }} {{ form_widget(form.images.vars.prototype.file)|e('html_attr') }}">
 </div>
 
+<div class="imgs">
+    <ul>
+        <li ng-repeat="img in images">
+            <div ng-bind-html="img"></div>
+        </li>
+    </ul>
+    <a href="#" id="img_prot" class="add_tag_link" ng-click="addImage()">Pridėti</a>
+</div>
+
+
+
 {{ form_label(form.ingredients) }}
 <div id="form_ingredients" data-prototype="{{ form_widget(form.ingredients.vars.prototype)|e('html_attr') }}">
+</div>
+<div class="ings">
+    <ul>
+        <li ng-repeat="ing in ingredients">
+            <div ng-bind-html="ing"></div>
+        </li>
+    </ul>
+    <a href="#" id="ing_prot" class="add_tag_link" ng-click="addIngredient()">Pridėti</a>
 </div>
 
     {{ form_row(form.instructions) }}
@@ -17,7 +36,7 @@
 
 
 <script>
-    var $collectionHolder;
+/*    var $collectionHolder;
     var $collectionHolder1;
 
     // setup an "add a tag" link
@@ -76,6 +95,6 @@
         });
 
 
-    });
+    });*/
 
 </script>

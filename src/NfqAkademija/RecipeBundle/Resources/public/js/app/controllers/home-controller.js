@@ -85,9 +85,20 @@ recipeApp
         })
     })
 
-    .controller('formController', function($scope, $http, $compile) {
+    .controller('formController', function($scope, $http, $compile, $sce) {
         $scope.formUrl = "/part/form";
         $scope.data = {};
+        $scope.images = [];
+        $scope.ingredients = [];
+
+        $scope.addImage = function() {
+            $scope.images.push($sce.trustAsHtml($('#form_images').data('prototype')))
+        };
+
+        $scope.addIngredient = function() {
+
+            $scope.images.push($sce.trustAsHtml($('#form_ingredients').data('prototype')));
+        };
 
         $scope.submit = function() {
             $http({
@@ -100,12 +111,6 @@ recipeApp
                     $scope.formResponse = $compile(data)($scope);
                 });
 
-        };
-
-        $scope.nullSafe = function ( field ) {
-            if ( !$scope.data[field] ) {
-                $scope.data[field] = {};
-            }
         };
     })
 

@@ -1,4 +1,4 @@
-var recipeApp = angular.module('recipeApp',['angular-loading-bar', 'ngTagsInput', 'ui.bootstrap', 'ui.router', 'wu.masonry', 'infinite-scroll']);
+var recipeApp = angular.module('recipeApp',['angular-loading-bar', 'ngTagsInput', 'ui.bootstrap', 'ui.router', 'wu.masonry', 'infinite-scroll', 'ngSanitize']);
 recipeApp.config(function(cfpLoadingBarProvider, $urlRouterProvider, $stateProvider, tagsInputConfigProvider, $locationProvider) {
 
     cfpLoadingBarProvider.includeSpinner = false;
