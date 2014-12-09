@@ -1,8 +1,9 @@
 services:
     recipe.rating:
         class: NfqAkademija\RecipeBundle\Services\RatingService
-        arguments:
-            em: "@doctrine"
+        calls:
+            - [setRequest, [@request_stack]]
+            - [setEntityManager, ["@doctrine.orm.entity_manager"]]
 
     recipe.service:
         class: NfqAkademija\RecipeBundle\Services\RecipeService

@@ -2,16 +2,29 @@
 
 namespace NfqAkademija\RecipeBundle\Services;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use NfqAkademija\RecipeBundle\Entity\Votes;
+use NfqAkademija\RecipeBundle\Entity\Recipe;
+use NfqAkademija\RecipeBundle\Entity\RecipeRating;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Doctrine\Common\Persistence\ObjectManager;
+
 
 class RatingService
 {
-    // usage: $entityManager = $this->managerRegistry->getManagerForClass(get_class($recipe));
-    protected $managerRegistry;
 
-    public function __construct(ManagerRegistry $managerRegistry)
+    protected $em;
+
+    protected $request;
+
+
+    public function setRequest(RequestStack $request_stack)
     {
-        $this->managerRegistry = $managerRegistry;
+        $this->request = $request_stack->getCurrentRequest();
+    }
+
+    public function setEntityManager(ObjectManager $em){
+        $this->em = $em;
     }
 
     /**
@@ -62,5 +75,57 @@ class RatingService
         }
 
         return $recipes;
+    }
+
+    public function postRatingAction($data)
+    {  
+        $voteData = json_decode($data, true);
+        $id = $voteData['id'];
+        $grade = $voteData['rating'];
+        $ip = $this->request->getClientIp();
+
+        $votes_repo = $this->em->getRepository('RecipeBundle:Votes');
+
+        if($votes_repo->hasUserVoted($voteData['id'], $ip)){
+            return false;
+        }
+
+        // Record user vote.
+        $recipe_repo = $this->em->getRepository('RecipeBundle:Recipe');
+        $recipe = $recipe_repo->find($voteData['id']);
+        $votes = new Votes();
+        $votes->setRecipe($recipe);
+        $votes->setGrade($voteData['rating']);
+        $votes->setIp($ip);
+        $this->em->persist($votes);
+        $this->em->flush();
+
+        // Get old average rating
+        $recipe = $recipe_repo->find($id);
+        $recipeRating = $recipe->getRecipeRating();
+
+        // Average rating for that recipe does not exist so let's create one.
+        if(!$recipeRating){
+            $recipeRating = new RecipeRating();
+            $recipeRating->setRecipe($recipe);
+            $recipeRating->setAverage($grade);
+            $recipeRating->setTotal(1);
+            $this->em->persist($recipeRating);
+            $this->em->flush();
+
+            return;
+        }
+
+        // Calculate new average rating.
+        $average = $recipeRating->getAverage();
+        $total = $recipeRating->getTotal();
+        $voteWeight = round($grade / ($total + 1), 2);
+        $avgWeight = round(($average / ($total + 1)) * $total, 2);
+        $newRating = $voteWeight + $avgWeight;
+
+        // Update rating.
+        $recipeRating->setAverage($newRating);
+        $recipeRating->setTotal($total + 1);
+        $this->em->flush();
     }
 }
