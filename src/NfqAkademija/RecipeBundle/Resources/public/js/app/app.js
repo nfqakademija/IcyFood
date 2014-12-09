@@ -70,7 +70,7 @@ recipeApp.config(function(cfpLoadingBarProvider, $urlRouterProvider, $stateProvi
             url: 'naujas',
             views: {
                 'modal@': {
-                    templateUrl: '/part/form',
+                    templateUrl: '/part/new.html',
                     controller: 'formController'
                 }
             }

@@ -47,7 +47,8 @@ class RecipeType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'NfqAkademija\RecipeBundle\Entity\Recipe'
+            'data_class' => 'NfqAkademija\RecipeBundle\Entity\Recipe',
+            'csrf_protection' => false,
         ));
     }
 

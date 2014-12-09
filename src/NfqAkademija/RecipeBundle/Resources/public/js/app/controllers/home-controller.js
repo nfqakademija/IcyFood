@@ -85,8 +85,28 @@ recipeApp
         })
     })
 
-    .controller('formController', function($scope, $stateParams, recipesFactory, $location) {
+    .controller('formController', function($scope, $http, $compile) {
+        $scope.formUrl = "/part/form";
+        $scope.data = {};
 
+        $scope.submit = function() {
+            $http({
+                method  : 'POST',
+                url     : '/form/naujas/submit',
+                data    : $scope.data,
+                headers : { 'Content-Type': 'multipart/form-data' }
+            })
+                .success(function(data) {
+                    $scope.formResponse = $compile(data)($scope);
+                });
+
+        };
+
+        $scope.nullSafe = function ( field ) {
+            if ( !$scope.data[field] ) {
+                $scope.data[field] = {};
+            }
+        };
     })
 
     .controller('RatingCtrl', function ($scope, $http) {

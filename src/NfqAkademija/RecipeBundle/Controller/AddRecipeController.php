@@ -60,7 +60,7 @@ class AddRecipeController extends Controller
             $em->persist($recipe);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('recipe_homepage'));
+            return $this->render('RecipeBundle:AddRecipe:newok.html.twig');
         }
 
         return $this->render(

@@ -1,0 +1,85 @@
+{% extends "bootstrap_3_layout.html.twig" %}
+
+{# Make data available to current scope as $scope.data - will not work with hidden fields #}
+{% block widget_attributes %}
+    {% spaceless %}
+        ng-focus="nullSafe('{{ full_name }}')"
+        ng-model="data['{{ full_name }}']" {# we add Angular ng-model #}
+        id="{{ id }}" name="{{ full_name }}"{% if read_only %} readonly="readonly"{% endif %}{% if disabled %} disabled="disabled"{% endif %}{% if required %} required="required"{% endif %}{% if max_length %} maxlength="{{ max_length }}"{% endif %}{% if pattern %} pattern="{{ pattern }}"{% endif %}
+        {% for attrname, attrvalue in attr %}{% if attrname in ['placeholder', 'title'] %}{{ attrname }}="{{ attrvalue|trans({}, translation_domain) }}" {% else %}{{ attrname }}="{{ attrvalue }}" {% endif %}{% endfor %}
+    {% endspaceless %}
+{% endblock widget_attributes %}
+
+        {# current controller submit() will called, instead of submitting the form #}
+        {% block form_start %}
+            {% spaceless %}
+                {% set method = method|upper %}
+                {% if method in ["GET", "POST"] %}
+                    {% set form_method = method %}
+                {% else %}
+                    {% set form_method = "POST" %}
+                {% endif %}
+                <form name="{{ form.vars.name }}" ng-submit="submit()" method="{{ form_method|lower }}" {% for attrname, attrvalue in attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}{% if multipart %} enctype="multipart/form-data"{% endif %}>
+                {% if form_method != method %}
+                    <input type="hidden" name="_method" value="{{ method }}" />
+                {% endif %}
+            {% endspaceless %}
+        {% endblock form_start %}
+
+{#
+{% block collection_widget %}
+    {% spaceless %}
+        <div class="collection">
+            {% if prototype is defined %}
+                {% set attr = attr|merge({'data-prototype': block('collection_item_widget') }) %}
+            {% endif %}
+            <div {{ block('widget_container_attributes') }}>
+                {{ form_errors(form) }}
+                <ul>
+                    {% for rows in form %}
+                        <li>
+                            {% set fieldNum = 1 %}
+                            {% for row in rows %}
+                                <div class="field{{ fieldNum }}">
+                                    {{ form_label(row) }}
+                                    {{ form_widget(row, { 'attr': { 'class': 'test' }}) }}
+                                </div>
+                                {% set fieldNum = fieldNum + 1 %}
+                            {% endfor %}
+                            <a class="remove" title="Remove" href="javascript:void()">
+                                <span>Delete</span>
+                            </a>
+                            <div class="clear"></div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {{ form_rest(form) }}
+            </div>
+            <div class="clear"></div>
+            <a class="add" title="Add" href="javascript:void()">
+                <div style="display: none;"></div>
+                <span>Add</span>
+            </a>
+        </div>
+        <div class="clear"></div>
+    {% endspaceless %}
+{% endblock collection_widget %}
+
+{% block collection_item_widget %}
+    {% spaceless %}
+        <li>
+            {% set fieldNum = 1 %}
+            {% for row in prototype %}
+                <div class="field{{ fieldNum }}">
+                    {{ form_label(row) }}
+                    {{ form_widget(row, { 'attr': { 'class': 'test' }}) }}
+                </div>
+                {% set fieldNum = fieldNum + 1 %}
+            {% endfor %}
+            <a class="remove" title="Remove" href="javascript:void()">
+                <span>Delete</span>
+            </a>
+            <div class="clear"></div>
+        </li>
+    {% endspaceless %}
+{% endblock collection_item_widget %}#}
