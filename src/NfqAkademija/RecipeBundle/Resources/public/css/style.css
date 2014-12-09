@@ -187,7 +187,7 @@ div.tag-sidebar > a{
     z-index:99999;
     top:30%;
     left:0px;
-    height:70%;
+    max-height:70%;
     pointer-events:none;
 }
 
