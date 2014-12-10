@@ -26,7 +26,7 @@ class RecipeRepository extends EntityRepository
             LEFT JOIN r.votes rv
             LEFT JOIN r.images rimg
             GROUP BY r.id
-            ORDER BY missing ASC
+            ORDER BY koef DESC
 
         ")
             ->setFirstResult($offset)
