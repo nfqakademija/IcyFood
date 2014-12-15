@@ -88,16 +88,32 @@ recipeApp
     .controller('formController', function($scope, $http, $compile, $sce) {
         $scope.formUrl = "/part/form";
         $scope.data = {};
-        $scope.images = [];
-        $scope.ingredients = [];
+        $scope.imagesCount = 0;
+        $scope.ingredientsCount = 0;
 
-        $scope.addImage = function() {
-            $scope.images.push($sce.trustAsHtml($('#form_images').data('prototype')))
+        var addField = function(id, count) {
+            var html = "<li>" + $(id).data('prototype') + "</li>";
+            html = html.replace("__name__", count);
+            var el = angular.element(html);
+
+            var compiled = $compile(el);
+            $(id + ' ul').append(el);
+            compiled($scope);
         };
 
-        $scope.addIngredient = function() {
+        $scope.add = function(type) {
+            var id, count;
+            switch(type){
+                case "image": { id = "#form_images"; count = ++$scope.imagesCount;} break;
+                case "ingredient": { id = "#form_ingredients"; count = ++$scope.ingredientsCount;} break;
+                default: {}
+            }
+            addField(id, count);
+        };
 
-            $scope.images.push($sce.trustAsHtml($('#form_ingredients').data('prototype')));
+        $scope.fileWatch = function(element, varstr) {
+            if(element.getAttribute("type") != 'file') return;
+            $scope.data[varstr] = element.files[0];
         };
 
         $scope.submit = function() {

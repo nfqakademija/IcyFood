@@ -3,7 +3,8 @@
 {# Make data available to current scope as $scope.data - will not work with hidden fields #}
 {% block widget_attributes %}
     {% spaceless %}
-        ng-model="data['{{ full_name }}']" {# we add Angular ng-model #}
+        ng-model="data['{{ full_name }}']"
+        onchange="angular.element(this).scope().fileWatch(this,'{{ full_name }}')"
         id="{{ id }}" name="{{ full_name }}"{% if read_only %} readonly="readonly"{% endif %}{% if disabled %} disabled="disabled"{% endif %}{% if required %} required="required"{% endif %}{% if max_length %} maxlength="{{ max_length }}"{% endif %}{% if pattern %} pattern="{{ pattern }}"{% endif %}
         {% for attrname, attrvalue in attr %}{% if attrname in ['placeholder', 'title'] %}{{ attrname }}="{{ attrvalue|trans({}, translation_domain) }}" {% else %}{{ attrname }}="{{ attrvalue }}" {% endif %}{% endfor %}
     {% endspaceless %}
